@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 
 // Edit Nilai User
 // Select Query
@@ -25,4 +25,4 @@ if (isset($_POST['edit'])) {
 }
 
 
-?>
+?> -->
