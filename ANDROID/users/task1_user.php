@@ -90,21 +90,12 @@
         <h1>Daftar Soal</h1>
         <div class="carousel-slide" id="carouselSlide">
             <?php
-            // Menghubungkan PHP dengan koneksi database
-            $koneksi = mysqli_connect("localhost", "root", "", "e_learning_jpl");
-
-            // Mengecek koneksi
-            if (!$koneksi) {
-                die("Koneksi gagal: " . mysqli_connect_error());
-            }
-
-            // Query untuk mengambil data soal dari database
             $id_level_tm = $_GET['id'];
-            $query = "SELECT tm.id_level, nama, tm.gambar, jenis_task, jawaban_benar, jawaban_salah1, jawaban_salah2, jawaban_salah3 FROM task_membaca as tm JOIN gambar_membaca as gm ON tm.id_level = gm.id_level WHERE tm.id_level = '$id_level_tm'";
+            $query = "SELECT tm.id_level, nama, tm.gambar, jawaban_benar, jawaban_salah1, jawaban_salah2, jawaban_salah3 FROM task_membaca as tm JOIN gambar_membaca as gm ON tm.id_level = gm.id_level WHERE tm.id_level = '$id_level_tm'";
             $result = mysqli_query($koneksi, $query);
-            // var_dump($id_level_tm);die;
-
             if ($result->num_rows > 0) :
+                $totalSlides = $result->num_rows; // Total slides
+                $currentIndex = 0; // Current slide index
                 while($row = $result->fetch_assoc()) :
                     $jawaban = array(
                         $row['jawaban_benar'],
@@ -114,83 +105,89 @@
                     );
                     shuffle($jawaban);
             ?>
-            <div class="carousel-item">
+            <div class="carousel-item <?php if ($currentIndex === 0) echo 'active'; ?>">
                 <div class="card-body">
                     <h2 class="card-title"><?php echo $row['nama']; ?></h2>
                     <img src="../images/gambar_task/<?php echo $row['gambar']; ?>" alt="Gambar Task" class="img-fluid">
-                    <form method="POST" action="cek_jawaban.php">
-                        <div class="form-group">
-                            <h2>Pilih Jawaban:</h2>
-                            <?php foreach ($jawaban as $key => $value) : ?>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="jawaban" value="<?php echo $value; ?>" id="jawaban_<?php echo $row['id_level'] . '_' . $key; ?>">
-                                    <label class="form-check-label" for="jawaban_<?php echo $row['id_level'] . '_' . $key; ?>">
-                                        <?php echo $value; ?>
-                                    </label>
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
-                        <input type="hidden" name="id_soal" value="<?php echo $row['id_level']; ?>">
-                        <button type="submit" class="btn-submit">Submit</button>
-                    </form>
+                    <div class="form-group">
+                        <h2>Pilih Jawaban:</h2>
+                        <?php foreach ($jawaban as $key => $value) : ?>
+                            <div class="form-check">
+                                <input class="form-check-input jawaban-radio" type="radio" name="jawaban_<?php echo $row['id_level']; ?>" value="<?php echo $value; ?>" id="jawaban_<?php echo $row['id_level'] . '_' . $key; ?>" data-jawaban-benar="<?php echo $row['jawaban_benar']; ?>" required>
+                                <label class="form-check-label" for="jawaban_<?php echo $row['id_level'] . '_' . $key; ?>">
+                                    <?php echo $value; ?>
+                                </label>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
             </div>
-            <?php endwhile; else : ?>
+            <?php
+                $currentIndex++;
+                endwhile;
+            else :
+            ?>
             <p>Tidak ada soal tersedia.</p>
             <?php endif; ?>
             <?php $koneksi->close(); ?>
-        </div>
-
-        <div class="carousel-controls">
-            <button class="carousel-button" id="prevButton">Previous</button>
-            <button class="carousel-button" id="nextButton">Next</button>
         </div>
     </div>
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-    const slide = document.getElementById('carouselSlide');
+document.addEventListener('DOMContentLoaded', () => {
     const slides = document.querySelectorAll('.carousel-item');
-    const prevButton = document.getElementById('prevButton');
-    const nextButton = document.getElementById('nextButton');
     let currentIndex = 0;
 
     function updateCarousel() {
         slides.forEach((slide, index) => {
             slide.classList.toggle('active', index === currentIndex);
         });
-
-        prevButton.disabled = currentIndex === 0;
-        nextButton.disabled = currentIndex === slides.length - 1 || !isAnswered();
     }
 
-    function isAnswered() {
-        const currentSlide = slides[currentIndex];
-        const answers = currentSlide.querySelectorAll('input[name="jawaban"]');
-        return Array.from(answers).some(answer => answer.checked);
-    }
-
-    prevButton.addEventListener('click', () => {
-        if (currentIndex > 0) {
-            currentIndex--;
-            updateCarousel();
-        }
-    });
-
-    nextButton.addEventListener('click', () => {
-        if (currentIndex < slides.length - 1 && isAnswered()) {
+    function moveToNextSlide() {
+        if (currentIndex < slides.length - 1) {
             currentIndex++;
             updateCarousel();
+        } else {
+            // Tambahkan poin saat menyelesaikan semua soal
+            fetch('poin_jawaban.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({})
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Selamat, Anda telah menyelesaikan semua soal');
+                    // Redirect ke halaman lain setelah menyelesaikan soal
+                    window.location.href = 'task_membaca.php';
+                } else {
+                    alert('Gagal memperbarui poin: ' + data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Terjadi kesalahan saat memperbarui poin.');
+            });
         }
-    });
+    }
 
     slides.forEach((slide, index) => {
-        const answers = slide.querySelectorAll('input[name="jawaban"]');
+        const answers = slide.querySelectorAll('.jawaban-radio');
         answers.forEach(answer => {
-            answer.addEventListener('change', () => {
-                if (index === currentIndex) {
-                    updateCarousel();
+            answer.addEventListener('change', (event) => {
+                const selectedAnswer = event.target;
+                const correctAnswer = selectedAnswer.dataset.jawabanBenar;
+                if (selectedAnswer.value === correctAnswer) {
+                    alert('Jawaban Anda benar!');
+                    setTimeout(() => {
+                        moveToNextSlide();
+                    }, 500); // Tambahkan jeda waktu sebelum pindah slide
+                } else {
+                    alert('Jawaban Anda salah, silakan coba lagi.');
                 }
             });
         });
@@ -198,9 +195,7 @@
 
     updateCarousel();
 });
-
 </script>
-
 <footer>
     <div class="footer-container">
         <div class="footer-column">
@@ -210,9 +205,7 @@
         <div class="footer-column">
             <h3><img src="../images/icons/link.png" alt="Quick Links Icon" class="footer-icon"> Quick Links</h3>
             <ul>
-                <li><a href="#section1">Huruf Jepang</a></li>
-                <li><a href="#section2">Pembelajaran 1</a></li>
-                <li><a href="#section3">Pembelajaran 2</a></li>
+                <li><a href="Dashboard_user.php">Halaman Utama</a></li>
             </ul>
         </div>
         <div class="footer-column">

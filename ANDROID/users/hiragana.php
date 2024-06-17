@@ -952,9 +952,7 @@
         <div class="footer-column">
             <h3><img src="../images/icons/link.png" alt="Quick Links Icon" class="footer-icon"> Quick Links</h3>
             <ul>
-                <li><a href="#section1">Huruf Jepang</a></li>
-                <li><a href="#section2">Pembelajaran 1</a></li>
-                <li><a href="#section3">Pembelajaran 2</a></li>
+                <li><a href="Dashboard_user.php">Halaman Utama</a></li>
             </ul>
         </div>
         <div class="footer-column">

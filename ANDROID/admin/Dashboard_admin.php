@@ -62,6 +62,12 @@
         <ul>
             <li><a href="#section1">Pembelajaran 1</a></li>
             <li><a href="#section2">Pembelajaran 2</a></li>
+            <?php
+            // Menambahkan tombol logout jika pengguna telah login
+            if (isset($_SESSION['id'])) {
+                echo '<li><a href="logout.php">Logout</a></li>';
+            }
+            ?>
         </ul>
     </nav>
     <main>

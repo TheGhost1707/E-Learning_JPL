@@ -18,14 +18,14 @@
     if (isset($_SESSION['id'])) {
         // Query untuk mengambil nama dan level pengguna dari tabel user (asumsi nama tabel adalah "user" dan kolom level adalah "level")
         $id = $_SESSION['id']; // Mengambil ID pengguna dari session
-        $sql = "SELECT nama, role, foto_profile FROM user WHERE id = '$id'";
+        $sql = "SELECT nama, progres_level, foto_profile FROM user WHERE id = '$id'";
         $result = mysqli_query($koneksi, $sql);
 
         if (mysqli_num_rows($result) > 0) {
-            // Ambil data nama, dan gambar profil
+            // Ambil data nama, level, dan gambar profil
             $row = mysqli_fetch_assoc($result);
             $nama = $row["nama"];
-            $role = $row["role"];
+            $progres_level = $row["progres_level"];
             $profile_picture = $row["foto_profile"];
         
             // Tampilkan gambar profil jika tersedia
@@ -40,83 +40,52 @@
             // Output nama dan level
             echo "<div class='profile-info'>";
             echo "<span>$nama</span>";
-            echo "<p>($role)</p>";
+            echo "<p id='levelText'>$progres_level</p>";
+
+            // Output progress bar
+            echo "<div class='progress-bar'>";
+            echo "<div class='progress' style='width: $progres_level%;'></div>";
+            echo "</div>";
             echo "</div>";
         } else {
             echo "0 results";
         }
+         // Script PHP untuk menentukan level
+         if (mysqli_num_rows($result) > 0) {
+            $exp_points = $progres_level;
+        
+            // Lakukan sesuatu dengan nilai exp_points, seperti menentukan level berdasarkan progres
+            $levelText = "";
+            $levelColor = ""; // Inisialisasi variabel untuk warna level
+            if ($exp_points >= 0 && $exp_points < 25) {
+                $levelText = 'Beginner';
+                $levelColor = '#00ff00'; // Warna hijau untuk level Beginner
+            } else if ($exp_points >= 25 && $exp_points < 50) {
+                $levelText = 'Master';
+                $levelColor = '#ffff00'; // Warna kuning untuk level Master
+            } else if ($exp_points >= 50 && $exp_points < 75) {
+                $levelText = 'Grandmaster';
+                $levelColor = '#0000ff'; // Warna biru untuk level Grandmaster
+            } else {
+                $levelText = 'Expert';
+                $levelColor = '#ff0000'; // Warna merah untuk level Expert
+            }
+        
+            // Output level yang ditentukan dengan warna khusus
+            echo "<script>
+                var levelText = document.getElementById('levelText');
+                levelText.textContent = '$levelText';
+                levelText.style.color = '$levelColor'; // Terapkan warna khusus
+            </script>";
+        }
+    } else {
+        // Jika 'id' tidak ada dalam session, tampilkan pesan kesalahan
+        echo "Session 'id' not found";
     }
     ?>
 </div>
 </header>
 <main>
-    <a href="tambah_level_membaca.php" style="color:white; text-decoration:none" id="tambahLevelLink">
-        <button class="btn-tambah-lvl">Tambah level</button>
-    </a>
-    <div id="popup1" class="popup">
-        <div class="popup-content">
-            <span class="close" id="close1">&times;</span>
-            <iframe src="tambah_level_membaca.php" width="100%" height="400px"></iframe>
-        </div>
-    </div>
-
-    <a href="tambah_task_membaca.php" style="color:white; text-decoration:none" id="tambahTaskLink">
-        <button class="btn-tambah-lvl">Tambah task</button>
-    </a>
-    <div id="popup2" class="popup">
-        <div class="popup-content">
-            <span class="close" id="close2">&times;</span>
-            <iframe src="tambah_task_membaca.php" width="100%" height="400px"></iframe>
-        </div>
-    </div>
-
-    <script>
-        // Tangkap elemen untuk pop-up pertama
-        var link1 = document.getElementById('tambahLevelLink');
-        var popup1 = document.getElementById('popup1');
-        var span1 = document.getElementById('close1');
-
-        // Fungsi untuk menampilkan pop-up pertama
-        link1.onclick = function(event) {
-            event.preventDefault();
-            popup1.style.display = 'block';
-        }
-
-        // Fungsi untuk menyembunyikan pop-up pertama
-        span1.onclick = function() {
-            popup1.style.display = 'none';
-        }
-
-        // Fungsi untuk menyembunyikan pop-up pertama ketika klik di luar konten
-        window.onclick = function(event) {
-            if (event.target == popup1) {
-                popup1.style.display = 'none';
-            }
-        }
-
-        // Tangkap elemen untuk pop-up kedua
-        var link2 = document.getElementById('tambahTaskLink');
-        var popup2 = document.getElementById('popup2');
-        var span2 = document.getElementById('close2');
-
-        // Fungsi untuk menampilkan pop-up kedua
-        link2.onclick = function(event) {
-            event.preventDefault();
-            popup2.style.display = 'block';
-        }
-
-        // Fungsi untuk menyembunyikan pop-up kedua
-        span2.onclick = function() {
-            popup2.style.display = 'none';
-        }
-
-        // Fungsi untuk menyembunyikan pop-up kedua ketika klik di luar konten
-        window.onclick = function(event) {
-            if (event.target == popup2) {
-                popup2.style.display = 'none';
-            }
-        }
-    </script>
 <?php
 // Membuat koneksi ke database
 $koneksi = mysqli_connect("localhost", "root", "", "e_learning_jpl");
@@ -137,7 +106,7 @@ if (mysqli_num_rows($result) > 0) {
     // Menampilkan data dalam format HTML
     while ($row = mysqli_fetch_assoc($result)) {
         echo '<div class="task-item">';
-        echo '<a href="task1.php?id=' . $row['id_level'] . '" style="color:black; text-decoration:none;">';
+        echo '<a href="task1_user.php?id=' . $row['id_level'] . '" style="color:black; text-decoration:none;">';
         echo '<img src="../images/gambar_task/' . $row['gambar'] . '" alt="Task Image ' . $row['id_level'] . '">';
         echo '<p>Level ' . $row['level'] . '</p>';
         echo '</a>';
@@ -168,7 +137,8 @@ function showTask(id_gambar) {
 </script>
 <div id="task-detail"></div>
 </main>
-<footer>
+
+    <footer>
     <div class="footer-container">
         <div class="footer-column">
             <h3><img src="../images/icons/about.png" alt="About Us Icon" class="footer-icon"> About Us</h3>
@@ -177,7 +147,7 @@ function showTask(id_gambar) {
         <div class="footer-column">
             <h3><img src="../images/icons/link.png" alt="Quick Links Icon" class="footer-icon"> Quick Links</h3>
             <ul>
-                <li><a href="Dashboard_admin.php">Halaman Utama</a></li>
+                <li><a href="Dashboard_user.php">Halaman Utama</a></li>
             </ul>
         </div>
         <div class="footer-column">
@@ -190,5 +160,3 @@ function showTask(id_gambar) {
         &copy; 2024 E-Learning Japanese Language. Games and Learning.
     </div>
 </footer>
-</body>
-</html>
