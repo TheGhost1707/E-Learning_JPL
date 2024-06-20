@@ -3,84 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Carousel Header</title>
+    <title>Daftar Soal Mendengar</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../fonts/icomoon/style.css">
     <link rel="stylesheet" href="../css/style-user.css">
 </head>
 <body>
 <header>
 <div class="profile">
     <?php
-    // Mengaktifkan session pada PHP
     session_start();
-    // Menghubungkan PHP dengan koneksi database
     $koneksi = mysqli_connect("localhost","root","","e_learning_jpl");
-    // Periksa apakah 'id' ada dalam session sebelum mengaksesnya
     if (isset($_SESSION['id'])) {
-        // Query untuk mengambil nama dan level pengguna dari tabel user (asumsi nama tabel adalah "user" dan kolom level adalah "level")
-        $id = $_SESSION['id']; // Mengambil ID pengguna dari session
-        $sql = "SELECT nama, progres_level, foto_profile FROM user WHERE id = '$id'";
+        $id = $_SESSION['id'];
+        $sql = "SELECT nama, role, foto_profile FROM user WHERE id = '$id'";
         $result = mysqli_query($koneksi, $sql);
-
         if (mysqli_num_rows($result) > 0) {
-            // Ambil data nama, level, dan gambar profil
             $row = mysqli_fetch_assoc($result);
             $nama = $row["nama"];
-            $progres_level = $row["progres_level"];
+            $role = $row["role"];
             $profile_picture = $row["foto_profile"];
-        
-            // Tampilkan gambar profil jika tersedia
             if (!empty($profile_picture)) {
-                // Tampilkan gambar dari database dengan menggunakan tag img
                 echo "<img src='../uploads_profile/$profile_picture' alt='Profile Picture'>";
             } else {
-                // Tampilkan gambar default jika gambar profil tidak tersedia
-                echo "<img src='../../images/default_profile_picture.jpg' alt='Profile Picture'>";
-            }        
-
-            // Output nama dan level
+                echo "<img src='../images/default_profile_picture.jpg' alt='Profile Picture'>";
+            }
             echo "<div class='profile-info'>";
             echo "<span>$nama</span>";
-            echo "<p id='levelText'>$progres_level</p>";
-
-            // Output progress bar
-            echo "<div class='progress-bar'>";
-            echo "<div class='progress' style='width: $progres_level%;'></div>";
-            echo "</div>";
+            echo "<p>($role)</p>";
             echo "</div>";
         } else {
             echo "0 results";
         }
-         // Script PHP untuk menentukan level
-         if (mysqli_num_rows($result) > 0) {
-            $exp_points = $progres_level;
-        
-            // Lakukan sesuatu dengan nilai exp_points, seperti menentukan level berdasarkan progres
-            $levelText = "";
-            $levelColor = ""; // Inisialisasi variabel untuk warna level
-            if ($exp_points >= 0 && $exp_points < 25) {
-                $levelText = 'Beginner';
-                $levelColor = '#00ff00'; // Warna hijau untuk level Beginner
-            } else if ($exp_points >= 25 && $exp_points < 50) {
-                $levelText = 'Master';
-                $levelColor = '#ffff00'; // Warna kuning untuk level Master
-            } else if ($exp_points >= 50 && $exp_points < 75) {
-                $levelText = 'Grandmaster';
-                $levelColor = '#0000ff'; // Warna biru untuk level Grandmaster
-            } else {
-                $levelText = 'Expert';
-                $levelColor = '#ff0000'; // Warna merah untuk level Expert
-            }
-        
-            // Output level yang ditentukan dengan warna khusus
-            echo "<script>
-                var levelText = document.getElementById('levelText');
-                levelText.textContent = '$levelText';
-                levelText.style.color = '$levelColor'; // Terapkan warna khusus
-            </script>";
-        }
-    } else {
-        // Jika 'id' tidak ada dalam session, tampilkan pesan kesalahan
-        echo "Session 'id' not found";
     }
     ?>
 </div>
@@ -91,31 +45,36 @@
         <div class="carousel-slide" id="carouselSlide">
             <?php
             $id_level_tm = $_GET['id'];
-            $query = "SELECT tm.id_level, nama, tm.gambar, jawaban_benar, jawaban_salah1, jawaban_salah2, jawaban_salah3 FROM task_membaca as tm JOIN gambar_membaca as gm ON tm.id_level = gm.id_level WHERE tm.id_level = '$id_level_tm'";
+            $query = "SELECT tm.id_level, tm.nama, tm.audio, tm.gambar_benar, tm.gambar_salah1, tm.gambar_salah2, tm.gambar_salah3 
+                      FROM task_mendengar as tm 
+                      JOIN gambar_mendengar as gm ON tm.id_level = gm.id_level 
+                      WHERE tm.id_level = '$id_level_tm'";
             $result = mysqli_query($koneksi, $query);
             if ($result->num_rows > 0) :
                 $totalSlides = $result->num_rows; // Total slides
                 $currentIndex = 0; // Current slide index
                 while($row = $result->fetch_assoc()) :
                     $jawaban = array(
-                        $row['jawaban_benar'],
-                        $row['jawaban_salah1'],
-                        $row['jawaban_salah2'],
-                        $row['jawaban_salah3']
+                        $row['gambar_benar'],
+                        $row['gambar_salah1'],
+                        $row['gambar_salah2'],
+                        $row['gambar_salah3']
                     );
                     shuffle($jawaban);
             ?>
             <div class="carousel-item <?php if ($currentIndex === 0) echo 'active'; ?>">
                 <div class="card-body">
                     <h2 class="card-title"><?php echo $row['nama']; ?></h2>
-                    <img src="../images/gambar_task/<?php echo $row['gambar']; ?>" alt="Gambar Task" class="img-fluid">
+                    <audio controls class="audio-task">
+                        <source src="../audio/<?php echo $row['audio']; ?>" type="audio/mpeg">
+                    </audio>
                     <div class="form-group">
                         <h2>Pilih Jawaban:</h2>
                         <?php foreach ($jawaban as $key => $value) : ?>
                             <div class="form-check">
-                                <input class="form-check-input jawaban-radio" type="radio" name="jawaban_<?php echo $row['id_level']; ?>" value="<?php echo $value; ?>" id="jawaban_<?php echo $row['id_level'] . '_' . $key; ?>" data-jawaban-benar="<?php echo $row['jawaban_benar']; ?>" required>
+                                <input class="form-check-input jawaban-radio" type="radio" name="jawaban_<?php echo $row['id_level']; ?>" value="<?php echo $value; ?>" id="jawaban_<?php echo $row['id_level'] . '_' . $key; ?>" data-jawaban-benar="<?php echo $row['gambar_benar']; ?>" required>
                                 <label class="form-check-label" for="jawaban_<?php echo $row['id_level'] . '_' . $key; ?>">
-                                    <?php echo $value; ?>
+                                    <img src="../images/gambar_task/<?php echo $value; ?>" alt="Jawaban" class="img-fluid">
                                 </label>
                             </div>
                         <?php endforeach; ?>
@@ -163,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (data.success) {
                     alert('Selamat, Anda telah menyelesaikan semua soal');
                     // Redirect ke halaman lain setelah menyelesaikan soal
-                    window.location.href = 'task_membaca.php';
+                    window.location.href = 'task_mendengar_admin.php';
                 } else {
                     alert('Gagal memperbarui poin: ' + data.error);
                 }
@@ -205,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="footer-column">
             <h3><img src="../images/icons/link.png" alt="Quick Links Icon" class="footer-icon"> Quick Links</h3>
             <ul>
-                <li><a href="Dashboard_user.php">Halaman Utama</a></li>
+                <li><a href="Dashboard_admin.php">Halaman Utama</a></li>
                 <?php
                 // Menambahkan tombol logout jika pengguna telah login
                 if (isset($_SESSION['id'])) {
@@ -224,3 +183,5 @@ document.addEventListener('DOMContentLoaded', () => {
         &copy; 2024 E-Learning Japanese Language. Games and Learning.
     </div>
 </footer>
+</body>
+</html>

@@ -337,11 +337,10 @@ label:hover {
     padding: 20px 60px;
     background-color: #e0e0e0;
     border-radius: 5px;
-    margin-right: 10px;
     margin-bottom: 80px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.452);
     max-width: 60px;
-    margin-left: 80px;
+    margin-left: 100px;
 }
 
 .box-container2:hover {
@@ -357,11 +356,17 @@ label:hover {
 /* Responsive CSS */
 @media screen and (max-width: 768px) {
     .box-container2 {
-        max-width: calc(30% - 60px); /* 20% - padding 20px */
-        margin-bottom: 20px;
-        margin-left: 100px;
         display: flex;
-        align-items: center;
+        justify-content: center; /* Pusatkan elemen secara horizontal */
+        align-items: center; /* Pusatkan elemen secara vertikal */
+        flex-wrap: wrap; /* Membuat elemen berbaris ke bawah jika tidak muat di satu baris */
+        gap: 20px; /* Jarak antar elemen */
+        margin-left: auto; /* Menghilangkan margin kiri */
+        margin-right: auto; /* Tambahkan margin kanan otomatis untuk memusatkan */
+    }
+
+    .box-container2 > * {
+        flex: 0 1 calc(20% - 20px); /* 20% lebar - padding 20px */
     }
 }
 
@@ -565,6 +570,11 @@ footer {
     margin-bottom:30px;
 }
 
+.card-body .audio-task{
+    position: relative;
+    margin-left: 150px;
+}
+
 .card-title {
     text-align: center;
     margin-bottom: 20px;
@@ -630,6 +640,11 @@ footer {
     .card-body {
         max-width: 400px;
         padding: 10px;
+    }
+
+    .card-body .audio-task{
+        margin: 0;
+        margin-left: 50px;
     }
     
     .btn-submit, .carousel-button {

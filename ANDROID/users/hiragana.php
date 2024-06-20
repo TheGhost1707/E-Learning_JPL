@@ -953,6 +953,12 @@
             <h3><img src="../images/icons/link.png" alt="Quick Links Icon" class="footer-icon"> Quick Links</h3>
             <ul>
                 <li><a href="Dashboard_user.php">Halaman Utama</a></li>
+                <?php
+                // Menambahkan tombol logout jika pengguna telah login
+                if (isset($_SESSION['id'])) {
+                    echo '<li><a href="logout.php">Logout</a></li>';
+                }
+                ?>
             </ul>
         </div>
         <div class="footer-column">

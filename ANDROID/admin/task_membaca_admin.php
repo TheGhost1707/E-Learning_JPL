@@ -148,7 +148,7 @@ if (mysqli_num_rows($result) > 0) {
     
     echo '</div>';
 } else {
-    echo "Tugas tidak tersedia untuk saat ini!";
+    echo "<p style='text-align:center;'>Tugas tidak tersedia untuk saat ini!</p>";
 }
 
 // Menutup koneksi database
@@ -186,7 +186,6 @@ function showTask(id_gambar) {
                     echo '<li><a href="logout.php">Logout</a></li>';
                 }
                 ?>
-                </ul>
             </ul>
         </div>
         <div class="footer-column">

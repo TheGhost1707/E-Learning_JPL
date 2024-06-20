@@ -34,7 +34,7 @@
                 echo "<img src='../uploads_profile/$profile_picture' alt='Profile Picture'>";
             } else {
                 // Tampilkan gambar default jika gambar profil tidak tersedia
-                echo "<img src='../../images/default_profile_picture.jpg' alt='Profile Picture'>";
+                echo "<img src='../images/default_profile_picture.jpg' alt='Profile Picture'>";
             }        
 
             // Output nama dan level
@@ -85,118 +85,60 @@
     ?>
 </div>
 </header>
-<div class="container">
-    <div class="carousel-container2">
-        <h1>Daftar Soal</h1>
-        <div class="carousel-slide" id="carouselSlide">
-            <?php
-            $id_level_tm = $_GET['id'];
-            $query = "SELECT tm.id_level, nama, tm.gambar, jawaban_benar, jawaban_salah1, jawaban_salah2, jawaban_salah3 FROM task_membaca as tm JOIN gambar_membaca as gm ON tm.id_level = gm.id_level WHERE tm.id_level = '$id_level_tm'";
-            $result = mysqli_query($koneksi, $query);
-            if ($result->num_rows > 0) :
-                $totalSlides = $result->num_rows; // Total slides
-                $currentIndex = 0; // Current slide index
-                while($row = $result->fetch_assoc()) :
-                    $jawaban = array(
-                        $row['jawaban_benar'],
-                        $row['jawaban_salah1'],
-                        $row['jawaban_salah2'],
-                        $row['jawaban_salah3']
-                    );
-                    shuffle($jawaban);
-            ?>
-            <div class="carousel-item <?php if ($currentIndex === 0) echo 'active'; ?>">
-                <div class="card-body">
-                    <h2 class="card-title"><?php echo $row['nama']; ?></h2>
-                    <img src="../images/gambar_task/<?php echo $row['gambar']; ?>" alt="Gambar Task" class="img-fluid">
-                    <div class="form-group">
-                        <h2>Pilih Jawaban:</h2>
-                        <?php foreach ($jawaban as $key => $value) : ?>
-                            <div class="form-check">
-                                <input class="form-check-input jawaban-radio" type="radio" name="jawaban_<?php echo $row['id_level']; ?>" value="<?php echo $value; ?>" id="jawaban_<?php echo $row['id_level'] . '_' . $key; ?>" data-jawaban-benar="<?php echo $row['jawaban_benar']; ?>" required>
-                                <label class="form-check-label" for="jawaban_<?php echo $row['id_level'] . '_' . $key; ?>">
-                                    <?php echo $value; ?>
-                                </label>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-            </div>
-            <?php
-                $currentIndex++;
-                endwhile;
-            else :
-            ?>
-            <p>Tidak ada soal tersedia.</p>
-            <?php endif; ?>
-            <?php $koneksi->close(); ?>
-        </div>
-    </div>
-</div>
+<main>
+<?php
+// Membuat koneksi ke database
+$koneksi = mysqli_connect("localhost", "root", "", "e_learning_jpl");
 
+// Mengecek koneksi
+if (!$koneksi) {
+    die("Koneksi gagal: " . mysqli_connect_error());
+}
+
+// Mengambil data dari tabel gambar_membaca
+$query = "SELECT id_level, gambar, level FROM gambar_mendengar";
+$result = mysqli_query($koneksi, $query);
+
+// Mengecek apakah ada data yang ditemukan
+if (mysqli_num_rows($result) > 0) {
+    echo '<div class="task-container">';
+    
+    // Menampilkan data dalam format HTML
+    while ($row = mysqli_fetch_assoc($result)) {
+        echo '<div class="task-item">';
+        echo '<a href="task2_user.php?id=' . $row['id_level'] . '" style="color:black; text-decoration:none;">';
+        echo '<img src="../images/gambar_task/' . $row['gambar'] . '" alt="Task Image ' . $row['id_level'] . '">';
+        echo '<p>Level ' . $row['level'] . '</p>';
+        echo '</a>';
+        echo '</div>';
+    }
+    
+    echo '</div>';
+} else {
+    echo "Tugas tidak tersedia untuk saat ini!";
+}
+
+// Menutup koneksi database
+mysqli_close($koneksi);
+?>
+
+<!-- JavaScript untuk menangani klik gambar -->
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-    const slides = document.querySelectorAll('.carousel-item');
-    let currentIndex = 0;
-
-    function updateCarousel() {
-        slides.forEach((slide, index) => {
-            slide.classList.toggle('active', index === currentIndex);
-        });
-    }
-
-    function moveToNextSlide() {
-        if (currentIndex < slides.length - 1) {
-            currentIndex++;
-            updateCarousel();
-        } else {
-            // Tambahkan poin saat menyelesaikan semua soal
-            fetch('poin_jawaban.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({})
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Selamat, Anda telah menyelesaikan semua soal');
-                    // Redirect ke halaman lain setelah menyelesaikan soal
-                    window.location.href = 'task_membaca.php';
-                } else {
-                    alert('Gagal memperbarui poin: ' + data.error);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Terjadi kesalahan saat memperbarui poin.');
-            });
+function showTask(id_gambar) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'get_task.php?id_gambar=' + id_gambar, true);
+    xhr.onload = function() {
+        if (this.status == 200) {
+            document.getElementById('task-detail').innerHTML = this.responseText;
         }
-    }
-
-    slides.forEach((slide, index) => {
-        const answers = slide.querySelectorAll('.jawaban-radio');
-        answers.forEach(answer => {
-            answer.addEventListener('change', (event) => {
-                const selectedAnswer = event.target;
-                const correctAnswer = selectedAnswer.dataset.jawabanBenar;
-                if (selectedAnswer.value === correctAnswer) {
-                    alert('Jawaban Anda benar!');
-                    setTimeout(() => {
-                        moveToNextSlide();
-                    }, 500); // Tambahkan jeda waktu sebelum pindah slide
-                } else {
-                    alert('Jawaban Anda salah, silakan coba lagi.');
-                }
-            });
-        });
-    });
-
-    updateCarousel();
-});
+    };
+    xhr.send();
+}
 </script>
-<footer>
+<div id="task-detail"></div>
+</main>
+
+    <footer>
     <div class="footer-container">
         <div class="footer-column">
             <h3><img src="../images/icons/about.png" alt="About Us Icon" class="footer-icon"> About Us</h3>

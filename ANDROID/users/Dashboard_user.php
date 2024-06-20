@@ -112,9 +112,6 @@
             <a href="katakana.php" class="link-style">
                 <label for="container">Katakana<br>(カタカナ)</label>
             </a>
-            <a href="kanji.php" class="link-style">
-                <label for="container">Kanji<br>(漢字)</label>
-            </a>
         </section>
         <section id="section2">
             <h2>Pembelajaran Dasar 1</h2>
@@ -163,6 +160,12 @@
                 <li><a href="#section1">Huruf Jepang</a></li>
                 <li><a href="#section2">Pembelajaran 1</a></li>
                 <li><a href="#section3">Pembelajaran 2</a></li>
+                <?php
+                // Menambahkan tombol logout jika pengguna telah login
+                if (isset($_SESSION['id'])) {
+                    echo '<li><a href="logout.php">Logout</a></li>';
+                }
+                ?>
             </ul>
         </div>
         <div class="footer-column">

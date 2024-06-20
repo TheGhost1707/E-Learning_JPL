@@ -91,31 +91,36 @@
         <div class="carousel-slide" id="carouselSlide">
             <?php
             $id_level_tm = $_GET['id'];
-            $query = "SELECT tm.id_level, nama, tm.gambar, jawaban_benar, jawaban_salah1, jawaban_salah2, jawaban_salah3 FROM task_membaca as tm JOIN gambar_membaca as gm ON tm.id_level = gm.id_level WHERE tm.id_level = '$id_level_tm'";
+            $query = "SELECT tm.id_level, tm.nama, tm.audio, tm.gambar_benar, tm.gambar_salah1, tm.gambar_salah2, tm.gambar_salah3 
+                      FROM task_mendengar as tm 
+                      JOIN gambar_mendengar as gm ON tm.id_level = gm.id_level 
+                      WHERE tm.id_level = '$id_level_tm'";
             $result = mysqli_query($koneksi, $query);
             if ($result->num_rows > 0) :
                 $totalSlides = $result->num_rows; // Total slides
                 $currentIndex = 0; // Current slide index
                 while($row = $result->fetch_assoc()) :
                     $jawaban = array(
-                        $row['jawaban_benar'],
-                        $row['jawaban_salah1'],
-                        $row['jawaban_salah2'],
-                        $row['jawaban_salah3']
+                        $row['gambar_benar'],
+                        $row['gambar_salah1'],
+                        $row['gambar_salah2'],
+                        $row['gambar_salah3']
                     );
                     shuffle($jawaban);
             ?>
             <div class="carousel-item <?php if ($currentIndex === 0) echo 'active'; ?>">
                 <div class="card-body">
                     <h2 class="card-title"><?php echo $row['nama']; ?></h2>
-                    <img src="../images/gambar_task/<?php echo $row['gambar']; ?>" alt="Gambar Task" class="img-fluid">
+                    <audio controls class="audio-task">
+                        <source src="../audio/<?php echo $row['audio']; ?>" type="audio/mpeg">
+                    </audio>
                     <div class="form-group">
                         <h2>Pilih Jawaban:</h2>
                         <?php foreach ($jawaban as $key => $value) : ?>
                             <div class="form-check">
-                                <input class="form-check-input jawaban-radio" type="radio" name="jawaban_<?php echo $row['id_level']; ?>" value="<?php echo $value; ?>" id="jawaban_<?php echo $row['id_level'] . '_' . $key; ?>" data-jawaban-benar="<?php echo $row['jawaban_benar']; ?>" required>
+                                <input class="form-check-input jawaban-radio" type="radio" name="jawaban_<?php echo $row['id_level']; ?>" value="<?php echo $value; ?>" id="jawaban_<?php echo $row['id_level'] . '_' . $key; ?>" data-jawaban-benar="<?php echo $row['gambar_benar']; ?>" required>
                                 <label class="form-check-label" for="jawaban_<?php echo $row['id_level'] . '_' . $key; ?>">
-                                    <?php echo $value; ?>
+                                    <img src="../images/gambar_task/<?php echo $value; ?>" alt="Jawaban" class="img-fluid">
                                 </label>
                             </div>
                         <?php endforeach; ?>
@@ -163,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (data.success) {
                     alert('Selamat, Anda telah menyelesaikan semua soal');
                     // Redirect ke halaman lain setelah menyelesaikan soal
-                    window.location.href = 'task_membaca.php';
+                    window.location.href = 'task_mendengar.php';
                 } else {
                     alert('Gagal memperbarui poin: ' + data.error);
                 }
