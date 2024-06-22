@@ -1,0 +1,729 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: rgb(56, 78, 138);
+    color: #fff;
+    text-align: center;
+    position: relative;
+}
+
+.carousel {
+    position: relative;
+    max-width: 100%;
+    overflow: auto;
+}
+
+.carousel-image {
+    display: none;
+    width: 100%;
+    height: 550px;
+}
+
+.carousel-image:first-child {
+    display: block;
+}
+
+h1 {
+    margin: 0;
+    padding-right: 20px;
+}
+
+nav {
+    background-color: rgb(56, 78, 138);
+    color: #fff;
+    padding: 30px 30px;
+    text-align: center;
+    position: absolute;
+    width: 95.8%;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    margin-right: 20px;
+}
+
+nav li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 20px;
+    padding: 10px;
+    transition: background-color 0.3s;
+}
+
+nav a:hover {
+    background-color: rgba(206, 206, 206, 0.562);
+}
+
+/* Responsive CSS */
+@media only screen and (max-width: 768px) {
+    nav ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    nav li {
+        margin: 0 5px;
+    }
+    nav{
+        width: 87.5%;
+    }
+    nav a{
+        font-size: 15px;
+    }
+    .carousel-image {
+        display: none;
+        width: 100%;
+        height: 300px;
+    }
+}
+
+main {
+    max-width: 100%; /* Atur lebar maksimum konten */
+    margin: 0 auto; /* Posisikan konten di tengah */
+    padding: 100px; /* Beri ruang di sekitar konten */
+    box-sizing: border-box; /* Menghitung padding dalam lebar total */
+    text-decoration: none;
+}
+
+section {
+    padding-top: 50px;
+    margin-bottom: 20px; /* Beri jarak antara setiap bagian */
+    border-bottom: 1px solid #ccc; /* Tambahkan garis horizontal */
+    padding-bottom: 20px; /* Beri ruang di bawah setiap bagian */
+}
+
+section:last-child {
+    margin-bottom: 0; /* Hapus margin bottom pada bagian terakhir */
+    border-bottom: none; /* Hapus garis horizontal pada bagian terakhir */
+}
+
+h2 {
+    margin-top: 0; /* Hapus margin atas untuk h2 */
+}
+
+p {
+    margin-bottom: 0; /* Hapus margin bawah untuk paragraf */
+    text-align: justify;
+}
+
+/* Responsive CSS */
+@media screen and (max-width: 768px) {
+    main {
+        width: 90%; /* Lebar konten akan mengisi 90% lebar layar */
+        margin-top: 120px; /* Atur margin atas untuk memberikan ruang antara header */
+        padding: 20px; /* Kurangi padding pada layar kecil */
+    }
+    p{
+        text-align: justify;
+    }
+}
+
+/* Styling untuk label */
+label {
+    display: inline-block; /* Menjadikan label sebagai elemen blok */
+    margin-top: 20px;
+    padding: 30px 40px; /* Padding pada label */
+    background-color: #e0e0e0; /* Warna latar belakang */
+    border-radius: 5px; /* Menggunakan sudut bulat untuk label */
+    margin-right: 10px; /* Margin antara label */
+    margin-bottom: 10px; /* Margin bawah label */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.452); /* Penambahan bayangan */
+}
+label:hover {
+    background-color: rgb(122, 211, 122);
+    font-weight: bold;
+    color: white;
+}
+
+
+/* Styling untuk section */
+#section1 {
+    margin-bottom: 10px; /* Margin bawah pada section */
+}
+
+/* Responsive CSS */
+@media screen and (max-width: 768px) {
+    label {
+        display: block; /* Mengubah label menjadi blok pada layar kecil */
+        width: 80%; /* Mengisi lebar pada layar kecil */
+        margin-right: 0; /* Menghapus margin kanan pada layar kecil */
+        text-align: center;
+    }
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 0 40px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.profile img {
+    width: 70px;
+    height: 70px; /* Mengatur tinggi tetap untuk menjaga proporsi */
+    object-fit: cover; /* Menyembunyikan sisi yang tidak muat ke dalam kotak */
+    border-radius: 50%; /* Membuat gambar menjadi lingkaran */
+    margin-right: 20px;
+    border: 4px solid rgb(255, 255, 255);
+}
+
+.profile .profile-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile .profile-info span {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.profile .profile-info p {
+    margin: 0 auto;
+    font-size: 16px;
+    padding-top: 5px;
+}
+
+.progress-bar {
+    width: 200px;
+    height: 10px;
+    background-color: #eee;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.progress {
+    width: 10%; /* Ubah nilai ini sesuai dengan kemajuan level */
+    height: 100%;
+    background-color: #7ec76c;
+    border-radius: 5px;
+}
+
+/* Responsive CSS */
+@media screen and (max-width: 768px) {
+    .profile{
+        padding: 0 30px;
+        padding-top:20px;
+        padding-bottom: 20px;
+    }
+    .profile img {
+        width: 60px;
+        height: 60px;
+        object-fit: cover; /* Menyembunyikan sisi yang tidak muat ke dalam kotak */
+        border-radius: 100%; /* Membuat gambar menjadi lingkaran */
+    }
+
+    .profile .profile-info span {
+        font-size: 16px;
+    }
+
+    .profile .profile-info p {
+        font-size: 13px;
+        margin: 0 auto;
+    }
+
+    .progress-bar {
+        width: 100px;
+    }
+}
+
+.overlay {
+    position: absolute;
+    top: 50%; /* Atur posisi vertikal ke 50% dari atas */
+    left: 50%; /* Atur posisi horizontal ke 50% dari kiri */
+    transform: translate(-50%, -50%); /* Geser ke atas dan ke kiri sejauh 50% dari lebar dan tinggi elemen sendiri */
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.377); /* Memberi latar belakang semi-transparan */
+    padding: 30px; /* Menambahkan padding untuk teks */
+    box-sizing: border-box; /* Menghitung padding dalam lebar dan tinggi elemen */
+    display: flex; /* Menggunakan flexbox untuk menengahkan teks */
+    justify-content: center; /* Menengahkan secara horizontal */
+    align-items: center; /* Menengahkan secara vertikal */
+}
+
+.text {
+    color: white; /* Warna teks */
+    font-size: 40px; /* Ukuran font */
+    font-weight: bold; /* Ketebalan teks */
+}
+
+/* Responsive CSS */
+@media screen and (max-width: 768px) {
+    .text {
+        font-size: 25px; /* Mengurangi ukuran font pada layar kecil */
+    }
+}
+
+/* Warna sesuai level */
+.beginner {
+    color: #d0ff00; /* Merah untuk level elite */
+}
+
+.master {
+    color: #ffa500; /* Jingga untuk level master */
+}
+
+.grandmaster {
+    color: #22bd3c; /* Kuning untuk level grandmaster */
+}
+
+.expert {
+    color: #ff2525; /* Hijau untuk level expert */
+}
+
+.box-container {
+    display: inline-block;
+    width: 100%; /* Lebar kontainer sesuai dengan lebar parent */
+    max-width: 300px; /* Lebar maksimum kontainer */
+    text-align: center; /* Pusatkan teks */
+    border-radius: 10px; /* Tambahkan border radius */
+    padding: 10px; /* Tambahkan padding */
+    margin-top: 20px;
+    margin-right: 20px;
+    box-sizing: border-box; /* Hitung border dan padding dalam lebar dan tinggi kontainer */
+    background-color: #e0e0e0; /* Warna latar belakang */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.452); /* Penambahan bayangan */
+}
+
+.box-container img {
+    width: 80px; /* Ukuran gambar */
+    height: auto; /* Tinggi gambar disesuaikan */
+    border-radius: 20%; /* Agar gambar menjadi lingkaran */
+    object-fit: cover;
+    padding-top: 20px;
+}
+.box-container:hover{
+    background-color: rgb(122, 211, 122);
+    font-weight: bold;
+    color: white;
+}
+/* Responsive CSS */
+@media screen and (max-width: 768px) {
+    .box-container {
+        display: block; /* Mengubah label menjadi blok pada layar kecil */
+        margin: 20px auto; /* Pusatkan box container di tengah */
+    }
+}
+
+.link-style {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    border-bottom: none; /* Menghilangkan garis bawah */
+}
+
+.link-style:hover {
+    text-decoration: none; /* Menghapus dekorasi pada hover */
+}
+
+
+.box-container2 {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 20px 60px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    margin-bottom: 80px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.452);
+    max-width: 60px;
+    margin-left: 100px;
+}
+
+.box-container2:hover {
+    background-color: rgb(231, 129, 155);
+}
+
+.box-container2 img {
+    max-width: 60px;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* Responsive CSS */
+@media screen and (max-width: 768px) {
+    .box-container2 {
+        display: flex;
+        justify-content: center; /* Pusatkan elemen secara horizontal */
+        align-items: center; /* Pusatkan elemen secara vertikal */
+        flex-wrap: wrap; /* Membuat elemen berbaris ke bawah jika tidak muat di satu baris */
+        gap: 20px; /* Jarak antar elemen */
+        margin-left: auto; /* Menghilangkan margin kiri */
+        margin-right: auto; /* Tambahkan margin kanan otomatis untuk memusatkan */
+    }
+
+    .box-container2 > * {
+        flex: 0 1 calc(20% - 20px); /* 20% lebar - padding 20px */
+    }
+}
+
+/* Footer Styles */
+footer {
+    background-color: rgb(56, 78, 138);
+    color: #fff;
+    padding: 10px 0;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.footer-column {
+    flex: 1;
+    margin: 0 80px;
+}
+
+.footer-column h3, .footer-column p {
+    color: #fff;
+    text-align: justify;
+    line-height: 1.3; /* Sesuaikan dengan kebutuhan Anda */
+    letter-spacing: 0.5px; /* Sesuaikan dengan kebutuhan Anda */
+}
+.footer-column .footer-icon{
+    width: 25px;
+    height: 25px; /* Mengatur tinggi tetap untuk menjaga proporsi */
+    object-fit: cover; /* Menyembunyikan sisi yang tidak muat ke dalam kotak */
+}
+
+
+.footer-column ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 10px;
+}
+
+.footer-column ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer-bottom {
+    margin-top: 30px;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #222;
+}
+
+/* Responsive CSS */
+@media screen and (max-width: 768px) {
+    .footer-bottom{
+        margin-top: 20px;
+    }
+    .footer-column{
+        margin-bottom: 40px;
+    }
+}
+
+.task-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 50px;
+    padding: 20px;
+}
+
+.task-item {
+    background-color: rgb(190, 190, 190);
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    width: calc(100% / 3 - 150px);
+    box-sizing: border-box;
+    text-align: center;
+    align-items: center;
+}
+
+.task-item img {
+    padding: 20px;
+    width: 100px;
+    height: auto;
+}
+
+.task-item p {
+    display: block;
+    text-align: center;
+    font-weight: bold;
+    margin: 10px 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+.task-item:hover {
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .task-item {
+        width: 80%;
+    }
+}
+
+.btn-tambah-lvl{
+    position: relative;
+    padding: 20px;
+    width: 150px;
+    background-color: #7ec76c;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    bottom:80px;
+}
+.btn-tambah-lvl:hover{
+    background-color: #22bd3c;
+    cursor: pointer;
+    font-weight: bold;
+}
+/* Gaya pop-up */
+.popup {
+    display: none; /* Sembunyikan pop-up secara default */
+    position: fixed; /* Posisi tetap */
+    z-index: 1; /* Z-index */
+    left: 0;
+    top: 0;
+    width: 100%; /* Lebar penuh */
+    height: 100%; /* Tinggi penuh */
+    overflow: auto; /* Overflow otomatis */
+    background-color: rgb(0,0,0); /* Warna latar belakang hitam */
+    background-color: rgba(0,0,0,0.4); /* Warna latar belakang dengan transparansi */
+}
+
+/* Konten pop-up */
+.popup-content {
+    background-color: #fefefe;
+    margin: 10% auto; /* Jarak margin */
+    padding: 10px;
+    border: 1px solid #888;
+    width: 30%;
+    border-radius: 10px; /* Sudut melengkung */
+}
+
+/* Tombol close */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+/* Responsive CSS */
+@media screen and (max-width: 768px) {
+    .popup-content{
+        width: 350px;
+    }
+}
+
+/* General styling for card and carousel items */
+.carousel-container2 h1{
+    padding: 30px;
+    display: block;
+    align-items: center;
+    text-align: center;
+}
+
+.carousel-item {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.carousel-item.active {
+    display: flex;
+}
+
+.card-body {
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #fff;
+    border: 2px solid;
+    margin-bottom:30px;
+}
+
+.card-body .audio-task{
+    position: relative;
+    margin-left: 150px;
+}
+
+.card-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.img-fluid {
+    display: block;
+    margin: auto;
+    max-width: 200px;
+    height: 200px;
+}
+
+.form-group {
+    padding: 20px;
+    margin-bottom: 20px;
+    display: block;
+    text-align: center;
+}
+
+.form-check-label {
+    width: 200px;
+    margin-left: 10px;
+}
+
+.btn-submit {
+    display: block;
+    width: 100%;
+    padding: 20px;
+    background-color: #1e9b47;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn-submit:hover {
+    background-color: #0056b3;
+}
+
+.carousel-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.carousel-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.carousel-button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    .card-body {
+        max-width: 400px;
+        padding: 10px;
+    }
+
+    .card-body .audio-task{
+        margin: 0;
+        margin-left: 50px;
+    }
+    
+    .btn-submit, .carousel-button {
+        font-size: 14px;
+        padding: 8px;
+    }
+    .form-check-label{
+        margin: 0;
+        display: block;
+        align-items: center;
+        margin-left: 50px;
+        margin-bottom: 20px;
+    }
+}
+.edit_button, .delete_button{
+    align-items: center;
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.delete_button {
+    background-color: #dc3545;
+}
+input[type="text"].form-control {
+    width: 50%;
+    max-width: 500px;
+    padding: 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    text-align: center;
+}
+
+input[type="text"].form-control:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 8px 0 rgba(76, 175, 80, 0.5);
+    outline: none;
+}
+
+button.btn {
+    position: relative;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    transition: background-color 0.3s ease-in-out;
+    margin-top: 10px;
+}
+
+button.btn:hover {
+    background-color: #45a049;
+}
+
+@media (max-width: 600px) {
+    input[type="text"].form-control {
+        width: 60%;
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    button.btn {
+        width: 30%;
+        font-size: 14px;
+        padding: 15px;
+    }
+}
