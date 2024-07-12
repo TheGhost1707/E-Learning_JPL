@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $jawaban_salah2 = $koneksi->real_escape_string($_POST['jawaban_salah2']);
     $jawaban_salah3 = $koneksi->real_escape_string($_POST['jawaban_salah3']);
 
-    // Mengambil data foto profile
+    // Mengambil data foto
     $foto_name = $_FILES['gambar']['name'];
     $foto_tmp = $_FILES['gambar']['tmp_name'];
     $foto_size = $_FILES['gambar']['size'];
@@ -109,6 +109,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </div>
                             <form action="" method="POST" enctype="multipart/form-data">
                                 <div class="form-group first">
+                                    <br>
+                                    <br>
                                 <label for="id_gambar" style="font-size:20px;">Task Untuk?</label>
                                 <select class="form-control" id="id_level" name="id_level" required>
                                     <option value="">Pilih Level</option>
@@ -124,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             echo "<option value='" . $row["id_level"] . "'>" . $row["level"] . "</option>";
                                         }
                                     } else {
-                                        echo "<option value=''>Tidak ada gambar tersedia</option>";
+                                        echo "<option value=''>Tidak ada level tersedia</option>";
                                     }
                                     ?>
                                 </select>

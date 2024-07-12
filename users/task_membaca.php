@@ -5,6 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task membaca</title>
     <link rel="stylesheet" href="../css/style-user.css">
+    <style>
+        .profile-pic {
+        cursor: pointer;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+    }
+
+    .profile-popup {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.5);
+    }
+
+    .popup-content {
+        background-color: #fff;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 400px;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    .popup-content img {
+        width: 100px;
+        height: 100px;
+        margin-bottom:10px;
+        border-radius: 50%;
+    }
+
+    .popup-content h2,h3{
+        margin:0;
+    }
+
+    .close-btn {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close-btn:hover,
+    .close-btn:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    </style>
 </head>
 <body>
 <header>
@@ -13,10 +69,10 @@
     // Mengaktifkan session pada PHP
     session_start();
     // Menghubungkan PHP dengan koneksi database
-    $koneksi = mysqli_connect("localhost","root","","e_learning_jpl");
+    $koneksi = mysqli_connect("localhost", "root", "", "e_learning_jpl");
     // Periksa apakah 'id' ada dalam session sebelum mengaksesnya
     if (isset($_SESSION['id'])) {
-        // Query untuk mengambil nama dan level pengguna dari tabel user (asumsi nama tabel adalah "user" dan kolom level adalah "level")
+        // Query untuk mengambil nama, level, dan gambar profil pengguna dari tabel user
         $id = $_SESSION['id']; // Mengambil ID pengguna dari session
         $sql = "SELECT nama, progres_level, foto_profile FROM user WHERE id = '$id'";
         $result = mysqli_query($koneksi, $sql);
@@ -27,15 +83,15 @@
             $nama = $row["nama"];
             $progres_level = $row["progres_level"];
             $profile_picture = $row["foto_profile"];
-        
+
             // Tampilkan gambar profil jika tersedia
             if (!empty($profile_picture)) {
                 // Tampilkan gambar dari database dengan menggunakan tag img
-                echo "<img src='../uploads_profile/$profile_picture' alt='Profile Picture'>";
+                echo "<img src='../uploads_profile/$profile_picture' alt='Profile Picture' onclick='openProfilePopup()' class='profile-pic'>";
             } else {
                 // Tampilkan gambar default jika gambar profil tidak tersedia
-                echo "<img src='../images/default_profile_picture.jpg' alt='Profile Picture'>";
-            }        
+                echo "<img src='../images/default_profile_picture.jpg' alt='Profile Picture' onclick='openProfilePopup()'>";
+            }
 
             // Output nama dan level
             echo "<div class='profile-info'>";
@@ -50,10 +106,10 @@
         } else {
             echo "0 results";
         }
-         // Script PHP untuk menentukan level
-         if (mysqli_num_rows($result) > 0) {
+        // Script PHP untuk menentukan level
+        if (mysqli_num_rows($result) > 0) {
             $exp_points = $progres_level;
-        
+
             // Lakukan sesuatu dengan nilai exp_points, seperti menentukan level berdasarkan progres
             $levelText = "";
             $levelColor = ""; // Inisialisasi variabel untuk warna level
@@ -70,7 +126,7 @@
                 $levelText = 'Expert';
                 $levelColor = '#ff0000'; // Warna merah untuk level Expert
             }
-        
+
             // Output level yang ditentukan dengan warna khusus
             echo "<script>
                 var levelText = document.getElementById('levelText');
@@ -84,6 +140,29 @@
     }
     ?>
 </div>
+
+<!-- Pop-up untuk Profil -->
+<div id="profile-popup" class="profile-popup">
+    <div class="popup-content">
+        <span class="close-btn" onclick="closeProfilePopup()">&times;</span>
+        <img src="<?php echo (!empty($profile_picture)) ? '../uploads_profile/'.$profile_picture : '../images/default_profile_picture.jpg'; ?>" alt="Profile Picture" style="border:5px solid black">
+        <h2 style="color:black;"><?php echo $nama; ?></h2>
+        <h3 style="color:black; font-weight:normal;">Level : <?php echo $levelText ?></h3>
+    </div>
+</div>
+
+<script>
+    // Script untuk menampilkan dan menyembunyikan pop-up profil
+    function openProfilePopup() {
+        var popup = document.getElementById('profile-popup');
+        popup.style.display = 'block';
+    }
+
+    function closeProfilePopup() {
+        var popup = document.getElementById('profile-popup');
+        popup.style.display = 'none';
+    }
+</script>
 </header>
 <main>
 <?php

@@ -130,7 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             echo "<option value='" . $row["id_level"] . "'>" . $row["level"] . "</option>";
                                         }
                                     } else {
-                                        echo "<option value=''>Tidak ada gambar tersedia</option>";
+                                        echo "<option value=''>Tidak ada level tersedia</option>";
                                     }
                                     ?>
                                 </select>

@@ -19,8 +19,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = mysqli_real_escape_string($koneksi, $username);
     $password = mysqli_real_escape_string($koneksi, $password);
 
-    // Mengenkripsi password dengan bcrypt sebelum menyimpan ke database
-
     // Menyeleksi data user dengan username dan password yang sesuai
     $login = mysqli_query($koneksi, "SELECT * FROM user WHERE username='$username' AND password='$password'");
     // Menghitung jumlah data yang ditemukan
@@ -37,11 +35,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['role'] = "Users";
             // Alihkan ke halaman dashboard pengguna
             header("location:users/Dashboard_user.php?pesan=sukses");
+            exit();
         } else {
-            // Autentikasi gagal, tampilkan pesan kesalahan atau redirect ke halaman error.
-            header("Location: halaman_error.php");
+            // Autentikasi gagal, tampilkan pesan kesalahan.
+            header("Location: index.php?pesan=gagal");
             exit();
         }
+    } else {
+        // Jika username atau password tidak ditemukan
+        header("Location: index.php?pesan=gagal");
+        exit();
     }
 }
 ?>
@@ -59,8 +62,52 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        .notification {
+            padding: 15px;
+            border-radius: 5px;
+            color: white;
+            text-align: center;
+            width: 300px;
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+        .notification.success {
+            background-color: #4CAF50;
+        }
+        .notification.error {
+            background-color: red;
+        }
+        .notification.show {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var notification = document.querySelector('.notification');
+            if (notification) {
+                notification.classList.add('show');
+                setTimeout(function() {
+                    notification.classList.remove('show');
+                }, 1500); // Notifikasi akan hilang setelah 3 detik
+            }
+        });
+    </script>
 </head>
 <body>
+<?php
+    // Menangkap pesan notifikasi jika ada
+    if (isset($_GET['pesan']) && $_GET['pesan'] == 'gagal') {
+        echo "<div class='notification error'><h3>Login gagal!</h3>Silahkan cek kembali password dan username anda.</div>";
+    }
+    ?>
     <div class="content">
         <div class="container">
             <div class="row">

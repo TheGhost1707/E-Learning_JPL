@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <input type="text" class="form-control" id="level" name="level" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="foto" style="font-size:20px;">Foto Profile</label>
+                                    <label for="foto" style="font-size:20px;">Gambar task</label>
                                 </div>
                                 <br>
                                 <input type="file" class="form-control-file" id="gambar" name="gambar" accept="image/*" required onchange="previewImage()">

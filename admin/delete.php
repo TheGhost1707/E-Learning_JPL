@@ -11,6 +11,7 @@ if (!$koneksi) {
 // Mengambil id_level dari parameter URL
 if (isset($_GET['id']) && isset($_GET['tabel'])) {
     $id_level = $_GET['id'];
+    $id = $_GET['id'];
     $tabel = $_GET['tabel'];
     $success = true;
     $errors = [];
@@ -58,7 +59,16 @@ if (isset($_GET['id']) && isset($_GET['tabel'])) {
             }
             $redirect = "Dashboard_admin.php";
             break;
-        default:
+        case 'percakapan':
+            // Menghapus dari gambar_percakapan
+            $query1 = "DELETE FROM gambar_percakapan WHERE id = '$id'";
+            if (!mysqli_query($koneksi, $query1)) {
+                $success = false;
+                $errors[] = "Error: " . $query1 . "<br>" . mysqli_error($koneksi);
+            }
+            $redirect = "Dashboard_admin.php";
+            break;
+            default:
             $success = false;
             $errors[] = "Tabel tidak dikenali.";
             $redirect = "Dashboard_admin.php";
