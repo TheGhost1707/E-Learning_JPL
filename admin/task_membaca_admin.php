@@ -214,7 +214,7 @@
         var spanEdit = document.getElementById('closeEdit');
 
         function openEditPopup(id) {
-            document.getElementById('editFrame').src = 'edit_mendengar.php?id=' + id;
+            document.getElementById('editFrame').src = 'edit_membaca.php?id=' + id;
             popupEdit.style.display = 'block';
         }
 

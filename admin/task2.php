@@ -7,27 +7,90 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../fonts/icomoon/style.css">
     <link rel="stylesheet" href="../css/style-user.css">
+    <style>
+        .profile-pic {
+        cursor: pointer;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+    }
+
+    .profile-popup {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.5);
+    }
+
+    .popup-content {
+        background-color: #fff;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 400px;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    .popup-content img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+    }
+
+    .close-btn {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close-btn:hover,
+    .close-btn:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    </style>
 </head>
 <body>
 <header>
 <div class="profile">
     <?php
+    // Mengaktifkan session pada PHP
     session_start();
-    $koneksi = mysqli_connect("localhost","root","","e_learning_jpl");
+    // Menghubungkan PHP dengan koneksi database
+    include "koneksi.php";
+    // Periksa apakah 'id' ada dalam session sebelum mengaksesnya
     if (isset($_SESSION['id'])) {
-        $id = $_SESSION['id'];
+        // Query untuk mengambil nama dan level pengguna dari tabel user (asumsi nama tabel adalah "user" dan kolom level adalah "level")
+        $id = $_SESSION['id']; // Mengambil ID pengguna dari session
         $sql = "SELECT nama, role, foto_profile FROM user WHERE id = '$id'";
         $result = mysqli_query($koneksi, $sql);
+
         if (mysqli_num_rows($result) > 0) {
+            // Ambil data nama, dan gambar profil
             $row = mysqli_fetch_assoc($result);
             $nama = $row["nama"];
-            $role = $row["role"];
             $profile_picture = $row["foto_profile"];
+            $role = $row['role'];
+        
+            // Tampilkan gambar profil jika tersedia
             if (!empty($profile_picture)) {
-                echo "<img src='../uploads_profile/$profile_picture' alt='Profile Picture'>";
+                // Tampilkan gambar dari database dengan menggunakan tag img
+                echo "<img src='../uploads_profile/$profile_picture' alt='Profile Picture' class='profile-pic'>";
             } else {
-                echo "<img src='../images/default_profile_picture.jpg' alt='Profile Picture'>";
-            }
+                // Tampilkan gambar default jika gambar profil tidak tersedia
+                echo "<img src='../images/default_profile_picture.jpg' alt='Profile Picture' class='profile-pic'>";
+            }        
+
+            // Output nama dan level
             echo "<div class='profile-info'>";
             echo "<span>$nama</span>";
             echo "<p>($role)</p>";
@@ -38,10 +101,38 @@
     }
     ?>
 </div>
+<div id="profile-popup" class="profile-popup">
+    <div class="popup-content">
+        <span class="close-btn">&times;</span>
+        <img src="<?php echo (!empty($profile_picture)) ? "../uploads_profile/$profile_picture" : "../images/default_profile_picture.jpg"; ?>" alt="Profile Picture">
+        <h2 style="color:black;"><?php echo $nama; ?> (<?php echo $role ?>)</h2>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var profilePic = document.querySelector('.profile-pic');
+        var popup = document.getElementById('profile-popup');
+        var closeBtn = document.querySelector('.close-btn');
+
+        profilePic.addEventListener('click', function() {
+            popup.style.display = 'block';
+        });
+
+        closeBtn.addEventListener('click', function() {
+            popup.style.display = 'none';
+        });
+
+        window.addEventListener('click', function(event) {
+            if (event.target == popup) {
+                popup.style.display = 'none';
+            }
+        });
+    });
+</script>
 </header>
 <div class="container">
     <div class="carousel-container2">
-        <h1>Daftar Soal</h1>
+        <h1 style="font-size:40px;">Daftar Soal</h1>
         <div class="carousel-slide" id="carouselSlide">
             <?php
             $id_level_tm = $_GET['id'];

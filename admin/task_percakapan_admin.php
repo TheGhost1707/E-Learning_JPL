@@ -229,7 +229,7 @@ if (mysqli_num_rows($result) > 0) {
         echo '<source src="../videos/video_percakapan/' . $row['video'] . '" type="video/mp4">';
         echo 'Your browser does not support the video tag.';
         echo '</video>';
-        echo '<h4>' . $row['jenis_percakapan'] . '</h4>';
+        echo '<p>' . $row['jenis_percakapan'] . '</p>';
         echo '<a href="#" onclick="openEditPopup(' . $row['id'] . ')" class="edit_button">Edit</a>';
         echo '<a href="delete.php?id=' . $row['id'] . '&tabel=percakapan" class="delete_button" onclick="return confirm(\'Anda yakin ingin menghapus percakapan ini?\')">Delete</a>';
         echo '</div>';
