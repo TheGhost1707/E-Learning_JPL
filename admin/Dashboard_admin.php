@@ -221,7 +221,14 @@
         <a href="task_percakapan_admin.php" style="color:black; text-decoration:none;">
         <div class="box-container">
             <img src="../images/icons/speaking.png" alt="">
-            <h4>Percakapan / Pembicaraan</h4>
+            <h4>Percakapan Video</h4>
+        </div>
+        </a>
+
+        <a href="percakapan.php" style="color:black; text-decoration:none;">
+        <div class="box-container">
+            <img src="../images/icons/speaking.png" alt="">
+            <h4>Wawancara</h4>
         </div>
         </a>
     </section>
