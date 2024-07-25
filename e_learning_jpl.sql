@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 12, 2024 at 04:14 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Waktu pembuatan: 14 Jul 2024 pada 17.17
+-- Versi server: 10.4.32-MariaDB
+-- Versi PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `gambar_membaca`
+-- Struktur dari tabel `gambar_membaca`
 --
 
 CREATE TABLE `gambar_membaca` (
@@ -33,10 +33,17 @@ CREATE TABLE `gambar_membaca` (
   `level` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data untuk tabel `gambar_membaca`
+--
+
+INSERT INTO `gambar_membaca` (`id_level`, `gambar`, `level`) VALUES
+(18, 'AI-gigapixel.jpg', 1);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `gambar_mendengar`
+-- Struktur dari tabel `gambar_mendengar`
 --
 
 CREATE TABLE `gambar_mendengar` (
@@ -48,7 +55,7 @@ CREATE TABLE `gambar_mendengar` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `gambar_menulis`
+-- Struktur dari tabel `gambar_menulis`
 --
 
 CREATE TABLE `gambar_menulis` (
@@ -60,7 +67,7 @@ CREATE TABLE `gambar_menulis` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `gambar_percakapan`
+-- Struktur dari tabel `gambar_percakapan`
 --
 
 CREATE TABLE `gambar_percakapan` (
@@ -70,7 +77,7 @@ CREATE TABLE `gambar_percakapan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `gambar_percakapan`
+-- Dumping data untuk tabel `gambar_percakapan`
 --
 
 INSERT INTO `gambar_percakapan` (`id`, `jenis_percakapan`, `video`) VALUES
@@ -80,7 +87,68 @@ INSERT INTO `gambar_percakapan` (`id`, `jenis_percakapan`, `video`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `task_membaca`
+-- Struktur dari tabel `kategori_percakapan`
+--
+
+CREATE TABLE `kategori_percakapan` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `kategori_percakapan`
+--
+
+INSERT INTO `kategori_percakapan` (`id`, `nama`) VALUES
+(1, 'Perkenalan'),
+(2, 'Pertanyaan Anak SD'),
+(3, 'Kategori 3'),
+(4, 'Perkenalan Opsi 2');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `percakapan`
+--
+
+CREATE TABLE `percakapan` (
+  `id` int(11) NOT NULL,
+  `pembuat_pesan` varchar(100) NOT NULL,
+  `nama_pesan` text NOT NULL,
+  `kapan_dibuat` timestamp NOT NULL DEFAULT current_timestamp(),
+  `kategori_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `percakapan`
+--
+
+INSERT INTO `percakapan` (`id`, `pembuat_pesan`, `nama_pesan`, `kapan_dibuat`, `kategori_id`) VALUES
+(1, 'John', 'Hai, saya John. Senang bertemu dengan Anda!', '2023-03-01 01:00:00', 1),
+(2, 'Doe', 'Hai John, saya Doe. Senang bertemu dengan Anda juga!', '2023-03-01 01:05:00', 1),
+(3, 'Alice', 'Halo Bob, nama saya Alice. Bagaimana kabar Anda?', '2023-03-02 02:30:00', 1),
+(4, 'Bob', 'Halo Alice, saya baik-baik saja. Bagaimana dengan Anda?', '2023-03-02 02:35:00', 1),
+(5, 'Anak A', 'Bu, kenapa langit berwarna biru?', '2023-04-01 03:00:00', 2),
+(6, 'Guru A', 'Langit berwarna biru karena atmosfer bumi menyebarkan cahaya biru dari matahari lebih banyak daripada warna lainnya.', '2023-04-01 03:05:00', 2),
+(7, 'Anak A', 'Pak, kenapa air laut asin?', '2023-04-02 04:00:00', 2),
+(8, 'Guru A', 'Air laut asin karena mengandung garam yang berasal dari batuan di daratan yang terlarut dan terbawa ke laut oleh sungai.', '2023-04-02 04:05:00', 2),
+(9, 'Anak A', 'Bu, kenapa pohon bisa tumbuh?', '2023-04-03 05:00:00', 2),
+(10, 'Guru A', 'Pohon bisa tumbuh karena fotosintesis, yaitu proses di mana tanaman menggunakan sinar matahari untuk membuat makanan dari air dan karbon dioksida.', '2023-04-03 05:05:00', 2),
+(11, 'Pengguna X', 'Apa pendapat Anda tentang teknologi terbaru?', '2023-05-01 07:00:00', 3),
+(12, 'Pengguna Y', 'Saya pikir teknologi terbaru sangat menarik dan memiliki potensi besar untuk masa depan.', '2023-05-01 07:05:00', 3),
+(13, 'Pengguna Z', 'Bagaimana Anda menggunakan teknologi dalam kehidupan sehari-hari?', '2023-05-02 08:00:00', 3),
+(14, 'Pengguna W', 'Saya menggunakan teknologi untuk bekerja, belajar, dan hiburan setiap hari.', '2023-05-02 08:05:00', 3),
+(15, 'Akbar ', 'Hallo Guys', '2024-07-14 14:51:11', 1),
+(16, 'Akbar ', 'Hallo', '2024-07-14 14:51:27', 4),
+(17, 'Eko', 'Kenapa Mau Pinjem Uang?', '2024-07-14 14:52:16', 4),
+(18, 'Akbar ', 'Engga Mau Nawari Lu Uang 5 jt mau gak?', '2024-07-14 14:52:46', 1),
+(19, 'Eko', 'Pertanyaan Bodoh Macam Apa Ini?', '2024-07-14 14:53:49', 2),
+(20, 'Akbar ', 'Yaelah Copy Paste GPT DOANG', '2024-07-14 14:54:56', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `task_membaca`
 --
 
 CREATE TABLE `task_membaca` (
@@ -97,7 +165,7 @@ CREATE TABLE `task_membaca` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `task_mendengar`
+-- Struktur dari tabel `task_mendengar`
 --
 
 CREATE TABLE `task_mendengar` (
@@ -114,7 +182,7 @@ CREATE TABLE `task_mendengar` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `task_penulisan`
+-- Struktur dari tabel `task_penulisan`
 --
 
 CREATE TABLE `task_penulisan` (
@@ -128,7 +196,7 @@ CREATE TABLE `task_penulisan` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Struktur dari tabel `user`
 --
 
 CREATE TABLE `user` (
@@ -142,7 +210,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `user`
+-- Dumping data untuk tabel `user`
 --
 
 INSERT INTO `user` (`id`, `foto_profile`, `nama`, `username`, `password`, `role`, `progres_level`) VALUES
@@ -154,104 +222,139 @@ INSERT INTO `user` (`id`, `foto_profile`, `nama`, `username`, `password`, `role`
 --
 
 --
--- Indexes for table `gambar_membaca`
+-- Indeks untuk tabel `gambar_membaca`
 --
 ALTER TABLE `gambar_membaca`
   ADD PRIMARY KEY (`id_level`);
 
 --
--- Indexes for table `gambar_mendengar`
+-- Indeks untuk tabel `gambar_mendengar`
 --
 ALTER TABLE `gambar_mendengar`
   ADD PRIMARY KEY (`id_level`);
 
 --
--- Indexes for table `gambar_menulis`
+-- Indeks untuk tabel `gambar_menulis`
 --
 ALTER TABLE `gambar_menulis`
   ADD PRIMARY KEY (`id_level`);
 
 --
--- Indexes for table `gambar_percakapan`
+-- Indeks untuk tabel `gambar_percakapan`
 --
 ALTER TABLE `gambar_percakapan`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `task_membaca`
+-- Indeks untuk tabel `kategori_percakapan`
+--
+ALTER TABLE `kategori_percakapan`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `percakapan`
+--
+ALTER TABLE `percakapan`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `kategori_id` (`kategori_id`);
+
+--
+-- Indeks untuk tabel `task_membaca`
 --
 ALTER TABLE `task_membaca`
   ADD PRIMARY KEY (`id_task`);
 
 --
--- Indexes for table `task_mendengar`
+-- Indeks untuk tabel `task_mendengar`
 --
 ALTER TABLE `task_mendengar`
   ADD PRIMARY KEY (`id_task`);
 
 --
--- Indexes for table `task_penulisan`
+-- Indeks untuk tabel `task_penulisan`
 --
 ALTER TABLE `task_penulisan`
   ADD PRIMARY KEY (`id_task`);
 
 --
--- Indexes for table `user`
+-- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `gambar_membaca`
+-- AUTO_INCREMENT untuk tabel `gambar_membaca`
 --
 ALTER TABLE `gambar_membaca`
-  MODIFY `id_level` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_level` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT for table `gambar_mendengar`
+-- AUTO_INCREMENT untuk tabel `gambar_mendengar`
 --
 ALTER TABLE `gambar_mendengar`
   MODIFY `id_level` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `gambar_menulis`
+-- AUTO_INCREMENT untuk tabel `gambar_menulis`
 --
 ALTER TABLE `gambar_menulis`
   MODIFY `id_level` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `gambar_percakapan`
+-- AUTO_INCREMENT untuk tabel `gambar_percakapan`
 --
 ALTER TABLE `gambar_percakapan`
   MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `task_membaca`
+-- AUTO_INCREMENT untuk tabel `kategori_percakapan`
+--
+ALTER TABLE `kategori_percakapan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT untuk tabel `percakapan`
+--
+ALTER TABLE `percakapan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT untuk tabel `task_membaca`
 --
 ALTER TABLE `task_membaca`
   MODIFY `id_task` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT for table `task_mendengar`
+-- AUTO_INCREMENT untuk tabel `task_mendengar`
 --
 ALTER TABLE `task_mendengar`
   MODIFY `id_task` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `task_penulisan`
+-- AUTO_INCREMENT untuk tabel `task_penulisan`
 --
 ALTER TABLE `task_penulisan`
   MODIFY `id_task` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+--
+
+--
+-- Ketidakleluasaan untuk tabel `percakapan`
+--
+ALTER TABLE `percakapan`
+  ADD CONSTRAINT `percakapan_ibfk_1` FOREIGN KEY (`kategori_id`) REFERENCES `kategori_percakapan` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

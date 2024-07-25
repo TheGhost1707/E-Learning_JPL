@@ -5,7 +5,7 @@ body {
 }
 
 header {
-    background-color: rgb(56, 78, 138);
+    background-color: rgb(55, 155, 221);
     color: #fff;
     text-align: center;
     position: relative;
@@ -33,7 +33,7 @@ h1 {
 }
 
 nav {
-    background-color: rgb(56, 78, 138);
+    background-color: rgb(55, 155, 221);
     color: #fff;
     padding: 30px 30px;
     text-align: center;
@@ -372,7 +372,7 @@ label:hover {
 
 /* Footer Styles */
 footer {
-    background-color: rgb(56, 78, 138);
+    background-color: rgb(55, 155, 221);
     color: #fff;
     padding: 10px 0;
 }

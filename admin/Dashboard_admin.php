@@ -216,19 +216,19 @@
         <section id="section2">
             <h2>Pembelajaran Dasar 2</h2>
             <p>Pada pembelajaran ini, kamu harus memahami pelajaran lanjutan dari pembelajaran dasar 1. Pelajaran ini seperti
-                percakapan atau pembicaraan dengan orang lain. Ada banyak jenis percakapannya silahkan dipelajari melalui video tayangan, aku yakin kamu cepat bisa !
+                percakapan atau pembicaraan dengan orang lain. Ada banyak jenis percakapannya silahkan dipelajari melalui video tayangan dan text percakapan, aku yakin kamu cepat bisa !
             </p>
         <a href="task_percakapan_admin.php" style="color:black; text-decoration:none;">
         <div class="box-container">
-            <img src="../images/icons/speaking.png" alt="">
-            <h4>Percakapan Video</h4>
+            <img src="../images/icons/play.png" alt="">
+            <h4>Video Pembelajaran</h4>
         </div>
         </a>
 
         <a href="percakapan.php" style="color:black; text-decoration:none;">
         <div class="box-container">
             <img src="../images/icons/speaking.png" alt="">
-            <h4>Wawancara</h4>
+            <h4>Percakapan / Pembicaraan</h4>
         </div>
         </a>
     </section>
@@ -244,6 +244,14 @@
             <ul>
                 <li><a href="#section1">Pembelajaran 1</a></li>
                 <li><a href="#section2">Pembelajaran 2</a></li>
+                <li>
+                <?php
+                // Menambahkan tombol logout jika pengguna telah login
+                if (isset($_SESSION['id'])) {
+                    echo '<li><a href="logout.php">Logout</a></li>';
+                }
+                ?>
+                </li>
             </ul>
         </div>
         <div class="footer-column">
