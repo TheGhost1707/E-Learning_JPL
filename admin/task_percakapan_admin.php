@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task membaca Admin</title>
+    <title>Video Pembelajaran Admin</title>
     <link rel="stylesheet" href="../css/style-user.css">
+    <link rel="icon" href="../images/icons/logo-web.png">
     <style>
         .profile-pic {
         cursor: pointer;
@@ -237,7 +238,7 @@ if (mysqli_num_rows($result) > 0) {
     
     echo '</div>';
 } else {
-    echo "<p style='text-align:center;'>Percakapan tidak tersedia untuk saat ini!</p>";
+    echo "<center>Video tidak tersedia untuk saat ini!</center>";
 }
 
 mysqli_close($koneksi);

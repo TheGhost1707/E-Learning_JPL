@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Halaman utama Admin</title>
     <link rel="stylesheet" href="../css/style-user.css">
+    <link rel="icon" href="../images/icons/logo-web.png">
     <style>
         .notification {
             padding: 15px;

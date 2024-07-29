@@ -29,6 +29,7 @@ while ($row = mysqli_fetch_assoc($hasil_percakapan)) {
     <title>Percakapan</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style-user.css">
+    <link rel="icon" href="../images/icons/logo-web.png">
     <style>
 .chat-container {
     max-width: 800px;
@@ -341,7 +342,7 @@ p {
         <?php else: ?>
             var noChatMessage = document.createElement('p');
             noChatMessage.classList.add('alert', 'alert-info');
-            noChatMessage.innerText = 'Tidak ada percakapan.';
+            noChatMessage.innerText = 'Tidak ada percakapan untuk saat ini.';
             chatList.appendChild(noChatMessage);
         <?php endif; ?>
     }

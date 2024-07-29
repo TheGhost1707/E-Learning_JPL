@@ -55,13 +55,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- Meta tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-learning Japanese Language</title>
+    <title>Login</title>
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="fonts/icomoon/style.css">
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/icons/logo-web.png">
     <style>
         .notification {
             padding: 15px;
@@ -106,6 +107,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Menangkap pesan notifikasi jika ada
     if (isset($_GET['pesan']) && $_GET['pesan'] == 'gagal') {
         echo "<div class='notification error'><h3>Login gagal!</h3>Silahkan cek kembali password dan username anda.</div>";
+    }
+    ?>
+    <?php
+    // Menangkap pesan notifikasi jika ada
+    if (isset($_GET['pesan']) && $_GET['pesan'] == 'register_success') {
+        echo "<div class='notification success'><h3>Register berhasil!</h3>Silahkan Login.</div>";
+    }
+    ?>
+     <?php
+    // Menangkap pesan notifikasi jika ada
+    if (isset($_GET['pesan']) && $_GET['pesan'] == 'register_failed') {
+        echo "<div class='notification error'><h3>Register gagal!</h3>Silahkan Coba Kembali.</div>";
     }
     ?>
     <div class="content">

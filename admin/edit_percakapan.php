@@ -69,6 +69,7 @@ mysqli_close($koneksi);
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" href="../images/icons/logo-web.png">
 </head>
 <body>
 <div class="content">

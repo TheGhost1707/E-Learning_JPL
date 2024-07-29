@@ -242,7 +242,7 @@ if (mysqli_num_rows($result) > 0) {
     // Menampilkan data dalam format HTML
     while ($row = mysqli_fetch_assoc($result)) {
         echo '<div class="task-item">';
-        echo '<a href="task1.php?id=' . $row['id_level'] . '" style="color:black; text-decoration:none;">';
+        echo '<a href="task2.php?id=' . $row['id_level'] . '" style="color:black; text-decoration:none;">';
         echo '<img src="../images/gambar_task/' . $row['gambar'] . '" alt="Task Image ' . $row['id_level'] . '">';
         echo '<p>Level ' . $row['level'] . '</p>';
         echo '</a>';
@@ -253,7 +253,7 @@ if (mysqli_num_rows($result) > 0) {
     
     echo '</div>';
 } else {
-    echo "<p style='text-align:center;'>Tugas tidak tersedia untuk saat ini!</p>";
+    echo "<center>Tugas tidak tersedia untuk saat ini!</center>";
 }
 
 

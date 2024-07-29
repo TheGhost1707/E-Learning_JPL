@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daftar soal membaca</title>
     <link rel="stylesheet" href="../css/style-user.css">
+    <link rel="icon" href="../images/icons/logo-web.png">
     <style>
            .profile-pic {
         cursor: pointer;
