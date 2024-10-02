@@ -161,7 +161,7 @@
                 endwhile;
             else :
             ?>
-            <p>Tidak ada soal tersedia.</p>
+            <p style="text-align:center; font-size:20px; margin:30px;">Tidak ada soal tersedia.</p>
             <?php endif; ?>
             <?php $koneksi->close(); ?>
         </div>
