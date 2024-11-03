@@ -1,9 +1,9 @@
-<?php 
+<?php
 // Mengaktifkan session pada PHP
 session_start();
- 
+
 // Menghubungkan PHP dengan koneksi database
-$koneksi = mysqli_connect("localhost","root","","e_learning_jpl");
+$koneksi = mysqli_connect("localhost", "root", "", "e_learning_jpl");
 
 // Memeriksa koneksi
 if (!$koneksi) {
@@ -23,14 +23,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $login = mysqli_query($koneksi, "SELECT * FROM user WHERE username='$username' AND password='$password'");
     // Menghitung jumlah data yang ditemukan
     $cek = mysqli_num_rows($login);
-    
+
     // Cek apakah username dan password ditemukan pada database
-    if($cek > 0){
+    if ($cek > 0) {
         $data = mysqli_fetch_assoc($login);
         // Simpan ID pengguna ke dalam session
         $_SESSION['id'] = $data['id'];
         // Cek jika user login sebagai user
-        if($data['role']=="Users"){
+        if ($data['role'] == "Users") {
             // Buat session role
             $_SESSION['role'] = "Users";
             // Alihkan ke halaman dashboard pengguna
@@ -51,6 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- Meta tags -->
     <meta charset="UTF-8">
@@ -79,18 +80,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             visibility: hidden;
             transition: opacity 0.5s, visibility 0.5s;
         }
+
         .notification.success {
             background-color: #4CAF50;
         }
+
         .notification.error {
             background-color: red;
         }
+
         .notification.show {
             opacity: 1;
             visibility: visible;
         }
     </style>
-     <script>
+    <script>
         document.addEventListener('DOMContentLoaded', function() {
             var notification = document.querySelector('.notification');
             if (notification) {
@@ -102,8 +106,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         });
     </script>
 </head>
+
 <body>
-<?php
+    <?php
     // Menangkap pesan notifikasi jika ada
     if (isset($_GET['pesan']) && $_GET['pesan'] == 'gagal') {
         echo "<div class='notification error'><h3>Login gagal!</h3>Silahkan cek kembali password dan username anda.</div>";
@@ -115,7 +120,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<div class='notification success'><h3>Register berhasil!</h3>Silahkan Login.</div>";
     }
     ?>
-     <?php
+    <?php
     // Menangkap pesan notifikasi jika ada
     if (isset($_GET['pesan']) && $_GET['pesan'] == 'register_failed') {
         echo "<div class='notification error'><h3>Register gagal!</h3>Silahkan Coba Kembali.</div>";
@@ -146,10 +151,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <div class="d-flex mb-5 align-items-center">
                                     <label class="control control--checkbox mb-0">
                                         <span class="caption">Ingat Saya</span>
-                                        <input type="checkbox" name="remember_me" checked="checked"/>
+                                        <input type="checkbox" name="remember_me" checked="checked" />
                                         <div class="control__indicator"></div>
                                     </label>
-                                    <span class="ml-auto"><a href="forget_password.php" class="forgot-pass"></a></span> 
+                                    <span class="ml-auto"><a href="forget_password.php" class="forgot-pass"></a></span>
                                 </div>
                                 <input type="submit" value="Masuk" class="btn text-white btn-block btn-primary">
                                 <span class="d-block text-left my-4 text-muted">Belum memiliki akun? <a href="register.php">Daftar sekarang!</a></span>
@@ -166,4 +171,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
 </body>
+
 </html>

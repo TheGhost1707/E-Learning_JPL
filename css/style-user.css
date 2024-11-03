@@ -76,12 +76,15 @@ nav a:hover {
     nav li {
         margin: 0 5px;
     }
-    nav{
+
+    nav {
         width: 87.5%;
     }
-    nav a{
+
+    nav a {
         font-size: 15px;
     }
+
     .carousel-image {
         display: none;
         width: 100%;
@@ -90,59 +93,82 @@ nav a:hover {
 }
 
 main {
-    max-width: 100%; /* Atur lebar maksimum konten */
-    margin: 0 auto; /* Posisikan konten di tengah */
-    padding: 100px; /* Beri ruang di sekitar konten */
-    box-sizing: border-box; /* Menghitung padding dalam lebar total */
+    max-width: 100%;
+    /* Atur lebar maksimum konten */
+    margin: 0 auto;
+    /* Posisikan konten di tengah */
+    padding: 100px;
+    /* Beri ruang di sekitar konten */
+    box-sizing: border-box;
+    /* Menghitung padding dalam lebar total */
     text-decoration: none;
 }
 
 section {
     padding-top: 50px;
-    margin-bottom: 20px; /* Beri jarak antara setiap bagian */
-    border-bottom: 1px solid #ccc; /* Tambahkan garis horizontal */
-    padding-bottom: 20px; /* Beri ruang di bawah setiap bagian */
+    margin-bottom: 20px;
+    /* Beri jarak antara setiap bagian */
+    border-bottom: 1px solid #ccc;
+    /* Tambahkan garis horizontal */
+    padding-bottom: 20px;
+    /* Beri ruang di bawah setiap bagian */
 }
 
 section:last-child {
-    margin-bottom: 0; /* Hapus margin bottom pada bagian terakhir */
-    border-bottom: none; /* Hapus garis horizontal pada bagian terakhir */
+    margin-bottom: 0;
+    /* Hapus margin bottom pada bagian terakhir */
+    border-bottom: none;
+    /* Hapus garis horizontal pada bagian terakhir */
 }
 
 h2 {
-    margin-top: 0; /* Hapus margin atas untuk h2 */
+    margin-top: 0;
+    /* Hapus margin atas untuk h2 */
 }
 
 p {
-    margin-bottom: 0; /* Hapus margin bawah untuk paragraf */
+    margin-bottom: 0;
+    /* Hapus margin bawah untuk paragraf */
     text-align: justify;
 }
 
 /* Responsive CSS */
 @media screen and (max-width: 768px) {
     main {
-        width: 90%; /* Lebar konten akan mengisi 90% lebar layar */
-        margin-top: 120px; /* Atur margin atas untuk memberikan ruang antara header */
-        padding: 20px; /* Kurangi padding pada layar kecil */
+        width: 90%;
+        /* Lebar konten akan mengisi 90% lebar layar */
+        margin-top: 120px;
+        /* Atur margin atas untuk memberikan ruang antara header */
+        padding: 20px;
+        /* Kurangi padding pada layar kecil */
     }
-    p{
+
+    p {
         text-align: justify;
     }
 }
 
 /* Styling untuk label */
 label {
-    display: inline-block; /* Menjadikan label sebagai elemen blok */
+    display: inline-block;
+    /* Menjadikan label sebagai elemen blok */
     margin-top: 20px;
-    padding: 30px 40px; /* Padding pada label */
-    background-color: #e0e0e0; /* Warna latar belakang */
-    border-radius: 5px; /* Menggunakan sudut bulat untuk label */
-    margin-right: 10px; /* Margin antara label */
-    margin-bottom: 10px; /* Margin bawah label */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.452); /* Penambahan bayangan */
+    padding: 30px 40px;
+    /* Padding pada label */
+    background-color: #e0e0e0;
+    /* Warna latar belakang */
+    border-radius: 5px;
+    /* Menggunakan sudut bulat untuk label */
+    margin-right: 10px;
+    /* Margin antara label */
+    margin-bottom: 10px;
+    /* Margin bawah label */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.452);
+    /* Penambahan bayangan */
 }
+
 label:hover {
-    background-color: rgb(122, 211, 122);
+    background-color: #44daa8;
     font-weight: bold;
     color: white;
 }
@@ -150,15 +176,19 @@ label:hover {
 
 /* Styling untuk section */
 #section1 {
-    margin-bottom: 10px; /* Margin bawah pada section */
+    margin-bottom: 10px;
+    /* Margin bawah pada section */
 }
 
 /* Responsive CSS */
 @media screen and (max-width: 768px) {
     label {
-        display: block; /* Mengubah label menjadi blok pada layar kecil */
-        width: 80%; /* Mengisi lebar pada layar kecil */
-        margin-right: 0; /* Menghapus margin kanan pada layar kecil */
+        display: block;
+        /* Mengubah label menjadi blok pada layar kecil */
+        width: 80%;
+        /* Mengisi lebar pada layar kecil */
+        margin-right: 0;
+        /* Menghapus margin kanan pada layar kecil */
         text-align: center;
     }
 }
@@ -174,9 +204,12 @@ label:hover {
 
 .profile img {
     width: 70px;
-    height: 70px; /* Mengatur tinggi tetap untuk menjaga proporsi */
-    object-fit: cover; /* Menyembunyikan sisi yang tidak muat ke dalam kotak */
-    border-radius: 50%; /* Membuat gambar menjadi lingkaran */
+    height: 70px;
+    /* Mengatur tinggi tetap untuk menjaga proporsi */
+    object-fit: cover;
+    /* Menyembunyikan sisi yang tidak muat ke dalam kotak */
+    border-radius: 50%;
+    /* Membuat gambar menjadi lingkaran */
     margin-right: 20px;
     border: 4px solid rgb(255, 255, 255);
 }
@@ -206,7 +239,8 @@ label:hover {
 }
 
 .progress {
-    width: 10%; /* Ubah nilai ini sesuai dengan kemajuan level */
+    width: 10%;
+    /* Ubah nilai ini sesuai dengan kemajuan level */
     height: 100%;
     background-color: #7ec76c;
     border-radius: 5px;
@@ -214,16 +248,19 @@ label:hover {
 
 /* Responsive CSS */
 @media screen and (max-width: 768px) {
-    .profile{
+    .profile {
         padding: 0 30px;
-        padding-top:20px;
+        padding-top: 20px;
         padding-bottom: 20px;
     }
+
     .profile img {
         width: 60px;
         height: 60px;
-        object-fit: cover; /* Menyembunyikan sisi yang tidak muat ke dalam kotak */
-        border-radius: 100%; /* Membuat gambar menjadi lingkaran */
+        object-fit: cover;
+        /* Menyembunyikan sisi yang tidak muat ke dalam kotak */
+        border-radius: 100%;
+        /* Membuat gambar menjadi lingkaran */
     }
 
     .profile .profile-info span {
@@ -242,80 +279,117 @@ label:hover {
 
 .overlay {
     position: absolute;
-    top: 50%; /* Atur posisi vertikal ke 50% dari atas */
-    left: 50%; /* Atur posisi horizontal ke 50% dari kiri */
-    transform: translate(-50%, -50%); /* Geser ke atas dan ke kiri sejauh 50% dari lebar dan tinggi elemen sendiri */
+    top: 50%;
+    /* Atur posisi vertikal ke 50% dari atas */
+    left: 50%;
+    /* Atur posisi horizontal ke 50% dari kiri */
+    transform: translate(-50%, -50%);
+    /* Geser ke atas dan ke kiri sejauh 50% dari lebar dan tinggi elemen sendiri */
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.377); /* Memberi latar belakang semi-transparan */
-    padding: 30px; /* Menambahkan padding untuk teks */
-    box-sizing: border-box; /* Menghitung padding dalam lebar dan tinggi elemen */
-    display: flex; /* Menggunakan flexbox untuk menengahkan teks */
-    justify-content: center; /* Menengahkan secara horizontal */
-    align-items: center; /* Menengahkan secara vertikal */
+    background-color: rgba(0, 0, 0, 0.377);
+    /* Memberi latar belakang semi-transparan */
+    padding: 30px;
+    /* Menambahkan padding untuk teks */
+    box-sizing: border-box;
+    /* Menghitung padding dalam lebar dan tinggi elemen */
+    display: flex;
+    /* Menggunakan flexbox untuk menengahkan teks */
+    justify-content: center;
+    /* Menengahkan secara horizontal */
+    align-items: center;
+    /* Menengahkan secara vertikal */
 }
 
 .text {
-    color: white; /* Warna teks */
-    font-size: 40px; /* Ukuran font */
-    font-weight: bold; /* Ketebalan teks */
+    color: white;
+    /* Warna teks */
+    font-size: 40px;
+    /* Ukuran font */
+    font-weight: bold;
+    /* Ketebalan teks */
 }
 
 /* Responsive CSS */
 @media screen and (max-width: 768px) {
     .text {
-        font-size: 25px; /* Mengurangi ukuran font pada layar kecil */
+        font-size: 25px;
+        /* Mengurangi ukuran font pada layar kecil */
     }
 }
 
 /* Warna sesuai level */
 .beginner {
-    color: #d0ff00; /* Merah untuk level elite */
+    color: #d0ff00;
+    /* Merah untuk level elite */
 }
 
 .master {
-    color: #ffa500; /* Jingga untuk level master */
+    color: #ffa500;
+    /* Jingga untuk level master */
 }
 
 .grandmaster {
-    color: #22bd3c; /* Kuning untuk level grandmaster */
+    color: #22bd3c;
+    /* Kuning untuk level grandmaster */
 }
 
 .expert {
-    color: #ff2525; /* Hijau untuk level expert */
+    color: #ff2525;
+    /* Hijau untuk level expert */
 }
 
 .box-container {
     display: inline-block;
-    width: 100%; /* Lebar kontainer sesuai dengan lebar parent */
-    max-width: 300px; /* Lebar maksimum kontainer */
-    text-align: center; /* Pusatkan teks */
-    border-radius: 10px; /* Tambahkan border radius */
-    padding: 10px; /* Tambahkan padding */
+    width: 100%;
+    /* Lebar kontainer sesuai dengan lebar parent */
+    max-width: 200px;
+    /* Lebar maksimum kontainer */
+    text-align: center;
+    /* Pusatkan teks */
+    border-radius: 10px;
+    /* Tambahkan border radius */
+    padding: 10px;
+    /* Tambahkan padding */
     margin-top: 20px;
     margin-right: 20px;
-    box-sizing: border-box; /* Hitung border dan padding dalam lebar dan tinggi kontainer */
-    background-color: #e0e0e0; /* Warna latar belakang */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.452); /* Penambahan bayangan */
+    box-sizing: border-box;
+    /* Hitung border dan padding dalam lebar dan tinggi kontainer */
+    background-color: #e0e0e0;
+    /* Warna latar belakang */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.452);
+    /* Penambahan bayangan */
 }
 
 .box-container img {
-    width: 80px; /* Ukuran gambar */
-    height: auto; /* Tinggi gambar disesuaikan */
-    border-radius: 20%; /* Agar gambar menjadi lingkaran */
+    width: 80px;
+    /* Ukuran gambar */
+    height: auto;
+    /* Tinggi gambar disesuaikan */
+    border-radius: 20%;
+    /* Agar gambar menjadi lingkaran */
     object-fit: cover;
     padding-top: 20px;
 }
-.box-container:hover{
-    background-color: rgb(122, 211, 122);
+
+.box-container h4,
+p {
+    margin: 10px;
+}
+
+.box-container:hover {
+    background-color: #44daa8;
     font-weight: bold;
     color: white;
 }
+
 /* Responsive CSS */
 @media screen and (max-width: 768px) {
     .box-container {
-        display: block; /* Mengubah label menjadi blok pada layar kecil */
-        margin: 20px auto; /* Pusatkan box container di tengah */
+        display: block;
+        /* Mengubah label menjadi blok pada layar kecil */
+        margin: 20px auto;
+        /* Pusatkan box container di tengah */
     }
 }
 
@@ -323,11 +397,13 @@ label:hover {
     text-decoration: none;
     color: inherit;
     cursor: pointer;
-    border-bottom: none; /* Menghilangkan garis bawah */
+    border-bottom: none;
+    /* Menghilangkan garis bawah */
 }
 
 .link-style:hover {
-    text-decoration: none; /* Menghapus dekorasi pada hover */
+    text-decoration: none;
+    /* Menghapus dekorasi pada hover */
 }
 
 
@@ -344,7 +420,7 @@ label:hover {
 }
 
 .box-container2:hover {
-    background-color: rgb(231, 129, 155);
+    background-color: #44daa8;
 }
 
 .box-container2 img {
@@ -357,16 +433,72 @@ label:hover {
 @media screen and (max-width: 768px) {
     .box-container2 {
         display: flex;
-        justify-content: center; /* Pusatkan elemen secara horizontal */
-        align-items: center; /* Pusatkan elemen secara vertikal */
-        flex-wrap: wrap; /* Membuat elemen berbaris ke bawah jika tidak muat di satu baris */
-        gap: 20px; /* Jarak antar elemen */
-        margin-left: auto; /* Menghilangkan margin kiri */
-        margin-right: auto; /* Tambahkan margin kanan otomatis untuk memusatkan */
+        justify-content: center;
+        /* Pusatkan elemen secara horizontal */
+        align-items: center;
+        /* Pusatkan elemen secara vertikal */
+        flex-wrap: wrap;
+        /* Membuat elemen berbaris ke bawah jika tidak muat di satu baris */
+        gap: 20px;
+        /* Jarak antar elemen */
+        margin-left: auto;
+        /* Menghilangkan margin kiri */
+        margin-right: auto;
+        /* Tambahkan margin kanan otomatis untuk memusatkan */
     }
 
-    .box-container2 > * {
-        flex: 0 1 calc(20% - 20px); /* 20% lebar - padding 20px */
+    .box-container2>* {
+        flex: 0 1 calc(20% - 20px);
+        /* 20% lebar - padding 20px */
+    }
+}
+
+.title-pembelajaran {
+    margin-top: 30px;
+}
+
+.box-container-flex {
+    display: inline-flex;
+    align-items: center;
+    background-color: #e0e0e0;
+    border-radius: 30px;
+    padding: 20px 20px;
+    margin: 20px 20px;
+    width: 100%;
+    /* Membuat lebar penuh untuk tampilan responsive */
+    max-width: 250px;
+    /* Batasan lebar maksimum */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.box-container-flex:hover {
+    transform: scale(1.02);
+    background-color: #44daa8;
+    color: white;
+}
+
+.box-container-flex img {
+    width: 40px;
+    height: 40px;
+    margin-right: 15px;
+}
+
+/* Responsive CSS */
+@media screen and (max-width: 768px) {
+    .box-container-flex {
+        display: flex;
+        align-items: center;
+        max-width: 180px;
+        /* Mengubah label menjadi blok pada layar kecil */
+        margin: 20px auto;
+        /* Pusatkan box container di tengah */
+    }
+
+    .title-pembelajaran {
+        margin: 0 auto;
+        padding: 30px 0;
+        text-align: center;
     }
 }
 
@@ -388,16 +520,22 @@ footer {
     margin: 0 80px;
 }
 
-.footer-column h3, .footer-column p {
+.footer-column h3,
+.footer-column p {
     color: #fff;
     text-align: justify;
-    line-height: 1.5; /* Sesuaikan dengan kebutuhan Anda */
-    letter-spacing: 0.5px; /* Sesuaikan dengan kebutuhan Anda */
+    line-height: 1.5;
+    /* Sesuaikan dengan kebutuhan Anda */
+    letter-spacing: 0.5px;
+    /* Sesuaikan dengan kebutuhan Anda */
 }
-.footer-column .footer-icon{
+
+.footer-column .footer-icon {
     width: 25px;
-    height: 25px; /* Mengatur tinggi tetap untuk menjaga proporsi */
-    object-fit: cover; /* Menyembunyikan sisi yang tidak muat ke dalam kotak */
+    height: 25px;
+    /* Mengatur tinggi tetap untuk menjaga proporsi */
+    object-fit: cover;
+    /* Menyembunyikan sisi yang tidak muat ke dalam kotak */
 }
 
 .footer-column ul {
@@ -425,15 +563,17 @@ footer {
 
 /* Responsive CSS */
 @media screen and (max-width: 768px) {
-    .footer-bottom{
+    .footer-bottom {
         margin-top: 20px;
     }
-    .footer-column{
+
+    .footer-column {
         margin-bottom: 40px;
     }
-    .footer-column p{
+
+    .footer-column p {
         width: 350px;
-        line-height: 1.8;
+        line-height: 1.5;
     }
 }
 
@@ -446,7 +586,7 @@ footer {
 }
 
 .task-item {
-    background-color: rgb(102, 206, 137);
+    background-color: #44daa8;
     border: 1px solid rgb(0, 0, 0);
     border-radius: 10px;
     overflow: hidden;
@@ -484,7 +624,7 @@ footer {
     }
 }
 
-.btn-tambah-lvl{
+.btn-tambah-lvl {
     position: relative;
     padding: 20px;
     width: 150px;
@@ -492,35 +632,47 @@ footer {
     color: white;
     border-radius: 5px;
     border: none;
-    bottom:80px;
+    bottom: 80px;
 }
-.btn-tambah-lvl:hover{
+
+.btn-tambah-lvl:hover {
     background-color: #22bd3c;
     cursor: pointer;
     font-weight: bold;
 }
+
 /* Gaya pop-up */
 .popup {
-    display: none; /* Sembunyikan pop-up secara default */
-    position: fixed; /* Posisi tetap */
-    z-index: 1; /* Z-index */
+    display: none;
+    /* Sembunyikan pop-up secara default */
+    position: fixed;
+    /* Posisi tetap */
+    z-index: 1;
+    /* Z-index */
     left: 0;
     top: 0;
-    width: 100%; /* Lebar penuh */
-    height: 100%; /* Tinggi penuh */
-    overflow: auto; /* Overflow otomatis */
-    background-color: rgb(0,0,0); /* Warna latar belakang hitam */
-    background-color: rgba(0,0,0,0.4); /* Warna latar belakang dengan transparansi */
+    width: 100%;
+    /* Lebar penuh */
+    height: 100%;
+    /* Tinggi penuh */
+    overflow: auto;
+    /* Overflow otomatis */
+    background-color: rgb(0, 0, 0);
+    /* Warna latar belakang hitam */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Warna latar belakang dengan transparansi */
 }
 
 /* Konten pop-up */
 .popup-content {
     background-color: #fefefe;
-    margin: 10% auto; /* Jarak margin */
+    margin: 10% auto;
+    /* Jarak margin */
     padding: 10px;
     border: 1px solid #888;
     width: 30%;
-    border-radius: 10px; /* Sudut melengkung */
+    border-radius: 10px;
+    /* Sudut melengkung */
 }
 
 /* Tombol close */
@@ -537,15 +689,16 @@ footer {
     text-decoration: none;
     cursor: pointer;
 }
+
 /* Responsive CSS */
 @media screen and (max-width: 768px) {
-    .popup-content{
+    .popup-content {
         width: 350px;
     }
 }
 
 /* General styling for card and carousel items */
-.carousel-container2 h1{
+.carousel-container2 h1 {
     padding: 30px;
     display: block;
     align-items: center;
@@ -572,10 +725,10 @@ footer {
     border-radius: 8px;
     background-color: #fff;
     border: 2px solid;
-    margin-bottom:30px;
+    margin-bottom: 30px;
 }
 
-.card-body .audio-task{
+.card-body .audio-task {
     position: relative;
     margin-left: 150px;
 }
@@ -651,16 +804,18 @@ footer {
         padding: 10px;
     }
 
-    .card-body .audio-task{
+    .card-body .audio-task {
         margin: 0;
         margin-left: 50px;
     }
-    
-    .btn-submit, .carousel-button {
+
+    .btn-submit,
+    .carousel-button {
         font-size: 14px;
         padding: 8px;
     }
-    .form-check-label{
+
+    .form-check-label {
         margin: 0;
         display: block;
         align-items: center;
@@ -668,7 +823,9 @@ footer {
         margin-bottom: 20px;
     }
 }
-.edit_button, .delete_button{
+
+.edit_button,
+.delete_button {
     align-items: center;
     display: inline-block;
     padding: 10px 20px;
@@ -685,6 +842,7 @@ footer {
 .delete_button {
     background-color: #dc3545;
 }
+
 input[type="text"].form-control {
     width: 50%;
     max-width: 500px;

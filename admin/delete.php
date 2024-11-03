@@ -68,7 +68,7 @@ if (isset($_GET['id']) && isset($_GET['tabel'])) {
             }
             $redirect = "Dashboard_admin.php";
             break;
-            default:
+        default:
             $success = false;
             $errors[] = "Tabel tidak dikenali.";
             $redirect = "Dashboard_admin.php";
@@ -94,4 +94,3 @@ if (isset($_GET['id']) && isset($_GET['tabel'])) {
     echo 'window.location.href = "Dashboard_admin.php";';
     echo '</script>';
 }
-?>

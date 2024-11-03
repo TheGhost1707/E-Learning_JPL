@@ -4,35 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Halaman utama</title>
+    <title>Pengenalan Dasar</title>
     <link rel="stylesheet" href="../css/style-user.css">
     <link rel="icon" href="../images/icons/logo-web.png">
     <style>
-        .notification {
-            padding: 15px;
-            border-radius: 5px;
-            color: white;
-            text-align: center;
-            width: 300px;
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 2000;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.5s, visibility 0.5s;
-        }
-
-        .notification.success {
-            background-color: #4CAF50;
-        }
-
-        .notification.show {
-            opacity: 1;
-            visibility: visible;
-        }
-
         .profile-pic {
             cursor: pointer;
             width: 100px;
@@ -88,27 +63,17 @@
             text-decoration: none;
             cursor: pointer;
         }
+
+        audio {
+            display: block;
+            margin: 20px;
+            width: 140px;
+            height: 50px;
+        }
     </style>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var notification = document.querySelector('.notification');
-            if (notification) {
-                notification.classList.add('show');
-                setTimeout(function() {
-                    notification.classList.remove('show');
-                }, 1500); // Notifikasi akan hilang setelah 3 detik
-            }
-        });
-    </script>
 </head>
 
 <body>
-    <?php
-    // Menangkap pesan notifikasi jika ada
-    if (isset($_GET['pesan']) && $_GET['pesan'] == 'sukses') {
-        echo "<div class='notification success'>Login berhasil!<h3>Selamat Datang Kembali.</h3></div>";
-    }
-    ?>
     <header>
         <div class="profile">
             <?php
@@ -209,108 +174,156 @@
                 popup.style.display = 'none';
             }
         </script>
-
-        <div class="carousel">
-            <img class="carousel-image" src="../images/bg_1.jpeg" alt="Image 1">
-            <img class="carousel-image" src="../images/bg_2.jpeg" alt="Image 2">
-            <img class="carousel-image" src="../images/bg_3.jpeg" alt="Image 3">
-            <div class="overlay">
-                <div class="text">SELAMAT DATANG <br> DI APLIKASI PEMBELAJARAN BAHASA JEPANG</div>
-            </div>
-        </div>
     </header>
-    <nav>
-        <ul>
-            <li><a href="#section">Pengenalan Huruf</a></li>
-            <li><a href="#section1">Pengenalan Dasar</a></li>
-            <li><a href="#section2">Latihan Soal</a></li>
-            <li><a href="#section3">Pembelajaran Lanjutan</a></li>
-            <li>
-        </ul>
-    </nav>
     <main>
-        <section id="section">
-            <h2>Pengenalan huruf</h2>
-            <p style=color:red>*Rekomendasi untuk pemula</p>
-            <p>Huruf dalam bahasa jepang dibagi menjadi 3 bagian yaitu hiragana, katakana, dan kanji. Pada pengenalan huruf ini hanya menampilkan 2 huruf dasar saja yaitu Hiragana dan Katakana.
-                Silahkan pelajari dahulu sebelum memulai pengenalan dasar, pembelajaran lanjutan dan soal.
-                Kamu juga bisa mendengarkan suara penyebutan hurufnya ketika kamu tap loohh..</p>
-            <a href="hiragana.php" class="link-style">
-                <label for="container">Hiragana<br>(ひらがな)</label>
-            </a>
-            <a href="katakana.php" class="link-style">
-                <label for="container">Katakana<br>(カタカナ)</label>
-            </a>
-        </section>
-        <section id="section1">
-            <h2>Pembelajaran Pengenalan Dasar</h2>
-            <p>Pada pembelajaran ini, kamu harus mengenali beberapa pelajaran seperti mendengarkan, membaca, maupun penulisan.
-                Setelah kamu menguasai pembelajaran dasar ini, kamu dapat mencoba latihan soal untuk mengukur kemampuanmu
+        <div class="title-pembelajaran">
+            <h1>Pengenalan suara nama buah</h1>
+            <hr>
+            <p>Pembelajaran berikut ini memperkenalkan nama-nama buah dalam bahasa Jepang.
+                Hafalkan dan pahami setiap nama buah, karena pengetahuan ini akan sangat bermanfaat!
+                Dengan menguasai penyebutan buah-buahan dalam bahasa Jepang, kamu semakin siap untuk berbicara layaknya seorang penutur asli.
+                Ganbatte!
             </p>
-            <a href="pengenalan_dasar1.php" style="color:black; text-decoration:none;">
-                <div class="box-container-flex">
-                    <img src="../images/icons/book.png" alt="">
-                    <h4>Pengenalan Kotoba</h4>
-                </div>
-            </a>
-            <a href="pengenalan_dasar2.php" style="color:black; text-decoration:none;">
-                <div class="box-container-flex">
-                    <img src="../images/icons/listening.png" alt="">
-                    <h4>Belajar Mendengarkan</h4>
+        </div>
+        <div class="content-pembelajaran">
+            <?php
+            include 'koneksi.php';
+            // Query untuk mengambil data dari tabel
+            $sql = "SELECT*FROM pengenalan_dasar2 where kategori='buah'";
+            $result = $koneksi->query($sql);
 
-                </div>
-            </a>
-            <a href="pengenalan_dasar3.php" style="color:black; text-decoration:none;">
-                <div class="box-container-flex">
-                    <img src="../images/icons/write.png" alt="">
-                    <h4>Cara Penulisan</h4>
-                </div>
-            </a>
-        </section>
-        <section id="section2">
-            <h2>Latihan Soal Pengenalan Dasar</h2>
-            <p>Pada pembelajaran ini, kamu harus menyelesaikan beberapa pelajaran seperti mendengarkan, membaca, maupun penulisan.
-                Masing-masing pelajaran ada tingkatan levelnya loh, semakin tinggi maka akan semakin susah pelajarannya. Silahkan pilih pelajaran yang menurutmu mudah dan kamu kuasai. ganbarre~
+            // Memeriksa apakah ada data yang tersedia
+            if ($result->num_rows > 0) {
+                // Loop melalui data dan menampilkan dalam HTML
+                while ($row = $result->fetch_assoc()) {
+            ?>
+                    <a href="#" style="color:black; text-decoration:none;">
+                        <div class="box-container">
+                            <img src="../images/gambar_task/<?php echo $row['gambar']; ?>" alt="">
+                            <audio controls src="../audio/<?php echo $row['audio']; ?>"></audio>
+                            <h4><?php echo htmlspecialchars($row['huruf_jepang']); ?></h4>
+                            <p style="text-align:center; font-size:18px; font-weight:bold;"><?php echo htmlspecialchars($row['arti_huruf']); ?></p>
+                        </div>
+                    </a>
+            <?php
+                }
+            } else {
+                echo "<p>Tidak ada data yang tersedia.</p>";
+            }
+            ?>
+        </div>
+        <div class="title-pembelajaran">
+            <h1>Pengenalan suara nama anggota keluarga</h1>
+            <hr>
+            <p>Pembelajaran berikut ini memperkenalkan nama-nama keluarga dalam bahasa Jepang.
+                Hafalkan dan pahami setiap nama keluarga, karena pengetahuan ini akan sangat bermanfaat!
+                Dengan menguasai penyebutan dalam bahasa Jepang, kamu semakin siap untuk berbicara layaknya seorang penutur asli.
+                Ganbatte!
             </p>
-            <a href="task_membaca.php" style="color:black; text-decoration:none;">
-                <div class="box-container">
-                    <img src="../images/icons/book.png" alt="">
-                    <h4>Membaca</h4>
-                </div>
-            </a>
-            <a href="task_mendengar.php" style="color:black; text-decoration:none;">
-                <div class="box-container">
-                    <img src="../images/icons/listening.png" alt="">
-                    <h4>Mendengarkan</h4>
-                </div>
-            </a>
-            <a href="task_menulis.php" style="color:black; text-decoration:none;">
-                <div class="box-container">
-                    <img src="../images/icons/write.png" alt="">
-                    <h4>Penulisan</h4>
-                </div>
-            </a>
-        </section>
-        <section id="section3">
-            <h2>Pembelajaran Lanjutan</h2>
-            <p>Pada pembelajaran ini, kamu harus memahami pelajaran lanjutan dari pengenalan huruf dan pengenalan dasar. Pelajaran ini seperti
-                percakapan atau pembicaraan dengan orang lain. Ada banyak jenis percakapannya silahkan dipelajari melalui video tayangan dan text percakapan, aku yakin kamu cepat bisa !
-            </p>
-            <a href="task_percakapan.php" style="color:black; text-decoration:none;">
-                <div class="box-container">
-                    <img src="../images/icons/play.png" alt="">
-                    <h4>Video Pembelajaran</h4>
-                </div>
-            </a>
+        </div>
+        <div class="content-pembelajaran">
+            <?php
+            include 'koneksi.php';
+            // Query untuk mengambil data dari tabel
+            $sql = "SELECT*FROM pengenalan_dasar2 where kategori='keluarga'";
+            $result = $koneksi->query($sql);
 
-            <a href="percakapan.php" style="color:black; text-decoration:none;">
-                <div class="box-container">
-                    <img src="../images/icons/speaking.png" alt="">
-                    <h4>Percakapan / Pembicaraan</h4>
-                </div>
-            </a>
-        </section>
+            // Memeriksa apakah ada data yang tersedia
+            if ($result->num_rows > 0) {
+                // Loop melalui data dan menampilkan dalam HTML
+                while ($row = $result->fetch_assoc()) {
+            ?>
+                    <a href="#" style="color:black; text-decoration:none;">
+                        <div class="box-container">
+                            <img src="../images/gambar_task/<?php echo $row['gambar']; ?>" alt="">
+                            <audio controls src="../audio/<?php echo $row['audio']; ?>"></audio>
+                            <h4><?php echo htmlspecialchars($row['huruf_jepang']); ?></h4>
+                            <p style="text-align:center; font-size:18px; font-weight:bold;"><?php echo htmlspecialchars($row['arti_huruf']); ?></p>
+                        </div>
+                    </a>
+            <?php
+                }
+            } else {
+                echo "<p>Tidak ada data yang tersedia.</p>";
+            }
+            ?>
+        </div>
+        <div class="title-pembelajaran">
+            <h1>Pengenalan suara nama kendaraan</h1>
+            <hr>
+            <p>Pembelajaran berikut ini memperkenalkan nama-nama kendaraan dalam bahasa Jepang.
+                Hafalkan dan pahami setiap nama kendaraan, karena pengetahuan ini akan sangat bermanfaat!
+                Dengan menguasai penyebutan dalam bahasa Jepang, kamu semakin siap untuk berbicara layaknya seorang penutur asli.
+                Ganbatte!
+            </p>
+        </div>
+        <div class="content-pembelajaran">
+            <?php
+            include 'koneksi.php';
+            // Query untuk mengambil data dari tabel
+            $sql = "SELECT*FROM pengenalan_dasar2 where kategori='kendaraan'";
+            $result = $koneksi->query($sql);
+
+            // Memeriksa apakah ada data yang tersedia
+            if ($result->num_rows > 0) {
+                // Loop melalui data dan menampilkan dalam HTML
+                while ($row = $result->fetch_assoc()) {
+            ?>
+                    <a href="#" style="color:black; text-decoration:none;">
+                        <div class="box-container">
+                            <img src="../images/gambar_task/<?php echo $row['gambar']; ?>" alt="">
+                            <audio controls src="../audio/<?php echo $row['audio']; ?>"></audio>
+                            <h4><?php echo htmlspecialchars($row['huruf_jepang']); ?></h4>
+                            <p style="text-align:center; font-size:18px; font-weight:bold;"><?php echo htmlspecialchars($row['arti_huruf']); ?></p>
+                        </div>
+                    </a>
+            <?php
+                }
+            } else {
+                echo "<p>Tidak ada data yang tersedia.</p>";
+            }
+
+            ?>
+        </div>
+        <div class="title-pembelajaran">
+            <h1>Pengenalan suara nama hewan</h1>
+            <hr>
+            <p>Pembelajaran berikut ini memperkenalkan nama-nama hewan dalam bahasa Jepang.
+                Hafalkan dan pahami setiap nama hewan, karena pengetahuan ini akan sangat bermanfaat!
+                Dengan menguasai penyebutan dalam bahasa Jepang, kamu semakin siap untuk berbicara layaknya seorang penutur asli.
+                Ganbatte!
+            </p>
+        </div>
+        <div class="content-pembelajaran">
+            <?php
+            include 'koneksi.php';
+            // Query untuk mengambil data dari tabel
+            $sql = "SELECT*FROM pengenalan_dasar2 where kategori='hewan'";
+            $result = $koneksi->query($sql);
+
+            // Memeriksa apakah ada data yang tersedia
+            if ($result->num_rows > 0) {
+                // Loop melalui data dan menampilkan dalam HTML
+                while ($row = $result->fetch_assoc()) {
+            ?>
+                    <a href="#" style="color:black; text-decoration:none;">
+                        <div class="box-container">
+                            <img src="../images/gambar_task/<?php echo $row['gambar']; ?>" alt="">
+                            <audio controls src="../audio/<?php echo $row['audio']; ?>"></audio>
+                            <h4><?php echo htmlspecialchars($row['huruf_jepang']); ?></h4>
+                            <p style="text-align:center; font-size:18px; font-weight:bold;"><?php echo htmlspecialchars($row['arti_huruf']); ?></p>
+                        </div>
+                    </a>
+            <?php
+                }
+            } else {
+                echo "<p>Tidak ada data yang tersedia.</p>";
+            }
+
+            ?>
+        </div>
     </main>
+
     <footer>
         <div class="footer-container">
             <div class="footer-column">
@@ -320,10 +333,7 @@
             <div class="footer-column">
                 <h3><img src="../images/icons/link.png" alt="Quick Links Icon" class="footer-icon"> Quick Links</h3>
                 <ul>
-                    <li><a href="#section">Pengenalan Huruf</a></li>
-                    <li><a href="#section1">Pengenalan Dasar</a></li>
-                    <li><a href="#section2">Latihan Soal</a></li>
-                    <li><a href="#section2">Pembelajaran Lanjutan</a></li>
+                    <li><a href="Dashboard_user.php">Halaman Utama</a></li>
                     <?php
                     // Menambahkan tombol logout jika pengguna telah login
                     if (isset($_SESSION['id'])) {
@@ -342,25 +352,6 @@
             &copy; 2024 E-Learning Japanese Language. Games and Learning.
         </div>
     </footer>
-
-    <script>
-        // JavaScript
-        let index = 0;
-        const images = document.querySelectorAll('.carousel-image');
-        const texts = ['Belajar dengan tema permainan yang seru', 'Pembelajaran yang mudah dipahami dan dihafal', 'Mendapatkan ilmu gratis dan praktis']; // Array teks sesuai dengan gambar
-
-        function nextSlide() {
-            images[index].style.display = 'none';
-            document.querySelector('.overlay .text').textContent = texts[index]; // Mengubah teks sesuai dengan gambar
-            index = (index + 1) % images.length;
-            images[index].style.display = 'block';
-        }
-
-        // Set interval untuk mengubah slide setiap beberapa detik
-        setInterval(nextSlide, 5000); // Ubah angka 3000 menjadi durasi yang diinginkan (dalam milidetik)
-    </script>
-
-    <script src="script.js"></script>
 </body>
 
 </html>
